@@ -1,0 +1,174 @@
+{
+  "Ni": "JG084498C",
+  "PaymentDate": 241213520153,
+  "Umbrella": "Liquid Friday Ltd",
+  "FileName": "J/G/24/10-250110430223.json",
+  "ClientId": "movedumbre-veritest",
+  "Software": "Merit Software",
+  "TaxOffice": "581/ZZ93044",
+  "RtiMatched": false,
+  "DuplicateCheck": true,
+  "File": {
+    "s3SchemaVersion": "1.0",
+    "configurationId": "movedumbre-veritest Upload",
+    "bucket": {
+      "name": "movedumbre-veritest",
+      "ownerIdentity": {
+        "principalId": "A3T1SVOD8DDS2E"
+      },
+      "arn": "arn:aws:s3:::movedumbre-veritest"
+    },
+    "object": {
+      "key": "133790038276829981.json",
+      "size": 523085,
+      "eTag": "d0ce81a64200257635e9a4a938a323aa",
+      "sequencer": "006762D4EB3AA39761"
+    }
+  },
+  "Period": 36,
+  "Errors": [
+    {
+      "CheckId": "New Starter",
+      "Type": "Info",
+      "Result": null,
+      "Ni": "JG084498C",
+      "Investigate": false,
+      "RunDate": 0,
+      "RunDateTime": 0,
+      "Area": null,
+      "Umbrella": "Liquid Friday Ltd",
+      "Software": null,
+      "Agency": null,
+      "Warning": "Worker not previously recorded.",
+      "FscaIgnore": null,
+      "Expected": null,
+      "Reported": null,
+      "PaymentDate": 241213520153
+    }
+  ],
+  "RunDate": 1734652800,
+  "EmployeeDeductions": {
+    "NI": 60.06,
+    "IncomeTax": 157.2,
+    "StudentLoan": 0,
+    "EmployeePension": 42.35,
+    "PostGradLoan": 39,
+    "OtherPostTaxDeductions": [
+      {
+        "Description": "PAYE Essential (Inc VAT)",
+        "Amount": 4.2
+      }
+    ],
+    "OtherTotal": 4.2
+  },
+  "EmployeePayment": {
+    "Rate": 11.44,
+    "Hours": 40,
+    "TotalBase": 457.6,
+    "Bonus": 612.65,
+    "HolidayPay": 0,
+    "Other": [],
+    "OtherTotal": 0,
+    "Total": 1070.25
+  },
+  "PaymentPeriod": {
+    "PayDate": "13/12/2024",
+    "TaxPeriod": 36,
+    "ActualTaxPeriod": 0,
+    "TaxYear": "2024",
+    "TaxPeriodType": "W",
+    "PeriodsCovered": 1
+  },
+  "HolidayPay": {
+    "Percentage": 12.07,
+    "AmountAdvanced": 0,
+    "AmountAccrued": 129.18,
+    "Method": "Accrued",
+    "TotalAccrued": 1605.1,
+    "TotalAccruedCosts": 292.49
+  },
+  "AssignmentDetails": {
+    "AssignmentLines": [
+      {
+        "Employer": "Liquid Friday Ltd",
+        "ClientName": "CARRINGTON WEST",
+        "Rate": 34.84,
+        "Units": 40,
+        "Total": 1393.6,
+        "PaymentType": "Time",
+        "Period": "02/12/2024-08/12/2024",
+        "DateReceived": "11/12/2024",
+        "InvoiceNo": "394454"
+      }
+    ],
+    "Expenses": [],
+    "Mileages": [],
+    "TotalInvoiced": 1393.6,
+    "TotalExpenses": 0,
+    "TotalMileage": 0,
+    "TotalReceived": 1393.6
+  },
+  "PaymentSummary": {
+    "GrossPay": 1070.25,
+    "EarningsForNI": 1070.25,
+    "EarningsForTax": 1027.9,
+    "Deductions": 298.61,
+    "OtherDeductions": 4.2,
+    "NetPay": 767.44,
+    "ExpensesPaid": 0,
+    "TotalPaid": 767.44
+  },
+  "Deductions": {
+    "Notes": "",
+    "Margin": 17.5,
+    "ApprenticeshipLevy": 5.35,
+    "NIERS": 123.55,
+    "EmploymentCosts": 305.85,
+    "EmployerPension": 25.41,
+    "HolidayPay": 129.18,
+    "HolidayPayCosts": 22.36,
+    "SalarySacrificePension": 0,
+    "ExpensesDetail": [],
+    "MileageDetail": [],
+    "GiftAid": 0,
+    "OtherDeductions": [],
+    "TotalDeducted": 323.35
+  },
+  "Worker": {
+    "NI": "JG084498C",
+    "NICategory": "A",
+    "TaxCode": "1257L",
+    "W1M1": false,
+    "EmployeeId": "200*119722",
+    "Email": "blennon81@gmail.com",
+    "DateOfBirth": "1961-12-09"
+  },
+  "RunDateTime": 160901153,
+  "AssignTotal": 1393.6,
+  "TaxableTotal": 1070.25,
+  "Paid": 767.44,
+  "Ytd": {
+    "GrossPayYTD": 33260.48,
+    "EarningsForTaxYTD": 0,
+    "TaxPaidYTD": 4765.4,
+    "EarningsForNIYTD": 32536.99,
+    "EmployeeNIYTD": 1815.48,
+    "EmployerNIYTD": 3817.19,
+    "EmployeePensionYTD": 723.49,
+    "EmployerPensionYTD": 434.09,
+    "StudentLoanYTD": 0,
+    "PostgraduateLoanYTD": 1190
+  },
+  "Agencies": [
+    {
+      "AgencyName": "Liquid Friday Ltd",
+      "Period": "",
+      "Amount": 1393.6,
+      "ReceivedDate": "2024-12-11"
+    }
+  ],
+  "RecordId": "ukLEdQYIPO",
+  "Comments": [],
+  "Mileages": [],
+  "Expenses": []
+}
