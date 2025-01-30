@@ -4,225 +4,87 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 require("./vendor/autoload.php");
-use Swaggest\JsonSchema\Schema;
+// use Swaggest\JsonSchema\Schema;
 
-$schemaJson = <<<'JSON'
-{
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "type": "object",
-    "properties": {
-        "Ni": {"type": "string"},
-        "PaymentDate": {"type": "number"},
-        "Umbrella": {"type": "string"},
-        "FileName": {"type": "string"},
-        "ClientId": {"type": "string"},
-        "Software": {"type": "string"},
-        "TaxOffice": {"type": "string"},
-        "RtiMatched": {"type": "boolean"},
-        "DuplicateCheck": {"type": "boolean"},
-        "File": {"type": "object"},
-        "Period": {"type": "number"},
-        "Errors": {
-          "type": "array",
-          "properties": {
-              "CheckId": {"type": "string"},
-              "Type": {"type": "number"},
-              "Result": {"type": "string"},
-              "Ni": {"type": "string"},
-              "Investigate": {"type": "boolean"},
-              "RunDate": {"type": "number"},
-              "RunDateTime": {"type": "number"},
-              "Area": {"type": "number"},
-              "Umbrella": {"type": "string"},
-              "Software": {"type": "string"},
-              "Agency": {"type": "string"},
-              "Warning": {"type": "string"},
-              "FscaIgnore": {"type": "string"},
-              "Expected": {"type": "string"},
-              "Reported": {"type": "string"},
-              "PaymentDate": {"type": "number"}
-          }
-        },
-        "RunDate": {"type": "number"},
-        "EmployeeDeductions": {
-          "type": "object",
-          "properties": {
-              "NI": {"type": "number"},
-              "IncomeTax": {"type": "number"},
-              "StudentLoan": {"type": "number"},
-              "EmployeePension": {"type": "number"},
-              "PostGradLoan": {"type": "number"},
-              "OtherPostTaxDeductions": {
-                "type": "array",
-                "properties": {
-                    "Description": {"type": "string"},
-                    "Amount": {"type": "number"}
-                }
-              },
-              "OtherTotal": {"type": "number"}
-          }
-        },
-        "EmployeePayment": {
-          "type": "object",
-          "properties": {
-              "Rate": {"type": "number"},
-              "Hours": {"type": "number"},
-              "TotalBase": {"type": "number"},
-              "Bonus": {"type": "number"},
-              "HolidayPay": {"type": "number"},
-              "Other": {"type": "array"},
-              "OtherTotal": {"type": "number"},
-              "Total": {"type": "number"}
-          }
-        },
-        "PaymentPeriod": {
-          "type": "object",
-          "properties": {
-              "PayDate": {"type": "string"},
-              "TaxPeriod": {"type": "number"},
-              "ActualTaxPeriod": {"type": "number"},
-              "TaxYear": {"type": "string"},
-              "TaxPeriodType": {"type": "string"},
-              "PeriodsCovered": {"type": "number"}
-          }
-        },
-        "HolidayPay": {
-          "type": "object",
-          "properties": {
-              "Percentage": {"type": "number"},
-              "AmountAdvanced": {"type": "number"},
-              "AmountAccrued": {"type": "number"},
-              "Method": {"type": "string"},
-              "TotalAccrued": {"type": "number"},
-              "TotalAccruedCosts": {"type": "number"}
-          }
-        },
-        "AssignmentDetails": {
-          "type": "object",
-          "properties": {
-              "AssignmentLines": {
-                "type": "array",
-                "properties": {
-                    "Employer": {"type": "string"},
-                    "ClientName": {"type": "string"},
-                    "Rate": {"type": "number"},
-                    "Units": {"type": "number"},
-                    "Total": {"type": "number"},
-                    "PaymentType": {"type": "string"},
-                    "Period": {"type": "string"},
-                    "DateReceived": {"type": "string"},
-                    "InvoiceNo": {"type": "string"}
-                }
-              },
-              "Expenses": {"type": "array"},
-              "Mileages": {"type": "array"},
-              "TotalInvoiced": {"type": "number"},
-              "TotalExpenses": {"type": "number"},
-              "TotalMileage": {"type": "number"},
-              "TotalReceived": {"type": "number"}
-          }
-        },
-        "PaymentSummary": {
-          "type": "object",
-          "properties": {
-              "GrossPay": {"type": "number"},
-              "EarningsForNI": {"type": "number"},
-              "EarningsForTax": {"type": "number"},
-              "Deductions": {"type": "number"},
-              "OtherDeductions": {"type": "number"},
-              "NetPay": {"type": "number"},
-              "ExpensesPaid": {"type": "number"},
-              "TotalPaid": {"type": "number"}
-          }
-        },
-        "Deductions": {
-          "type": "object",
-          "properties": {
-              "Notes": {"type": "string"},
-              "Margin": {"type": "number"},
-              "ApprenticeshipLevy": {"type": "number"},
-              "NIERS": {"type": "number"},
-              "EmploymentCosts": {"type": "number"},
-              "EmployerPension": {"type": "number"},
-              "HolidayPay": {"type": "number"},
-              "HolidayPayCosts": {"type": "number"},
-              "SalarySacrificePension": {"type": "number"},
-              "ExpensesDetail": {"type": "array"},
-              "MileageDetail": {"type": "array"},
-              "GiftAid": {"type": "number"},
-              "OtherDeductions": {"type": "array"},
-              "TotalDeducted": {"type": "number"}
-          }
-        },
-        "Worker": {
-          "type": "object",
-          "properties": {
-              "NI": {"type": "string"},
-              "NICategory": {"type": "string"},
-              "TaxCode": {"type": "string"},
-              "W1M1": {"type": "number"},
-              "EmployeeId": {"type": "string"},
-              "Email": {"type": "string"},
-              "DateOfBirth": {"type": "string"}
-          }
-        },
-        "RunDateTime": {"type": "number"},
-        "AssignTotal": {"type": "number"},
-        "TaxableTotal": {"type": "number"},
-        "Paid": {"type": "number"},
-        "Ytd": {
-          "type": "object",
-          "properties": {
-              "GrossPayYTD": {"type": "number"},
-              "EarningsForTaxYTD": {"type": "number"},
-              "TaxPaidYTD": {"type": "number"},
-              "EarningsForNIYTD": {"type": "number"},
-              "EmployeeNIYTD": {"type": "number"},
-              "EmployerNIYTD": {"type": "number"},
-              "EmployeePensionYTD": {"type": "number"},
-              "EmployerPensionYTD": {"type": "number"},
-              "StudentLoanYTD": {"type": "number"},
-              "PostgraduateLoanYTD": {"type": "number"}
-          }
-        },
-        "Agencies": {
-          "type": "object",
-          "properties": {
-              "AgencyName": {"type": "string"},
-              "Period": {"type": "string"},
-              "Amount": {"type": "number"},
-              "ReceivedDate": {"type": "string"},
-          }
-        },
-        "RecordId": {"type": "string"},
-        "Comments": {"type": "array"},
-        "Mileages": {"type": "array"},
-        "Expenses": {"type": "array"}
-    }
-}
-JSON;
+use Opis\JsonSchema\{
+    Validator,
+    ValidationResult,
+    Errors\ErrorFormatter,
+};
+
+// Create a new validator
+$validator = new Validator();
+
+// Register our schema
+$validator->resolver()->registerFile(
+    'http://api.example.com/profile.json',
+    './test_schema.json'
+);
+
+
 
 
 if(isset($_GET['validate_json'])){
-  try{
-       $schemaObject = Schema::import(
-           json_decode($schemaJson),
-       )->in(
-           json_decode($_POST['json_data']),
-       );
-       echo "JSON is valid according to the schema.";
 
-   }catch(\Swaggest\JsonSchema\Exception\ValidationException $e){
-       // echo nl2br("JSON validation error: " . $e->getMessage());
-       echo "1<pre>";
-       var_dump($e);
-   }catch(\Swaggest\JsonSchema\Exception\TypeException $e1){
-       // echo nl2br("JSON validation Type error: " . $e1->getMessage());
-       echo "2<pre>";
-       // var_dump($e1->inspect());
-       var_dump($e1);
-   }
-   die();
+  $data = $_POST['json_data'];
+
+  // "location": {
+  //     "country": "US",
+  //     "address": "Sesame Street, no. 5"
+  // },
+
+  $data = <<<'JSON'
+  {
+      "name": "John Doe",
+      "age": 31,
+      "email": "john@example.com",
+      "website": null,
+      "location": {
+          "country": "US",
+          "address": false
+      },
+      "available_for_hire": true,
+      "interests": ["php", "html", "css", "javascript", "programming", "web design"],
+      "skills": [
+          {
+              "name": "HTML",
+              "value": 100
+          },
+          {
+              "name": "PHP",
+              "value": 55
+          },
+          {
+              "name": "CSS",
+              "value": 99.5
+          },
+          {
+              "name": "JavaScript",
+              "value": 75
+          }
+      ]
+  }
+  JSON;
+
+  // Decode $data
+  $data = json_decode($data);
+
+  /** @var ValidationResult $result */
+  $result = $validator->validate($data, 'http://api.example.com/profile.json');
+
+  if ($result->isValid()) {
+      $is_valid_result = "Valid";
+  } else {
+      // Print errors
+      $is_valid_result = (new ErrorFormatter())->format($result->error());
+  }
+
+  $return_data['is_valid'] = $is_valid_result;
+  // $return_data['formatted_json'] = json_decode($_POST['json_data']);
+
+  echo json_encode($return_data, JSON_PRETTY_PRINT);
+
+  die();
 }
 ?>
 <html>
@@ -254,7 +116,7 @@ if(isset($_GET['validate_json'])){
         .ok_msg{background-color:#0c8a01;}
         .footer_content{margin:0 auto; width:80%; max-width:600px; text-align:right;}
 
-        #json_data{ width:100%; height:200px;}
+        #json_data{ width:100%; height:500px;}
         #short_url{ width:calc(100% - 160px); margin-right:10px; }
         #validate_json{ width:250px; }
 
@@ -271,16 +133,28 @@ if(isset($_GET['validate_json'])){
 $(function(){
 
     $('#validate_json').click(function(){
+      var json_data = $('#json_data').val();
+      var parseJSON = JSON.parse(json_data);
+
       $.ajax({
           type: "POST",
-          url: "index.php?validate_json",
+          url: "test.php?validate_json",
           cache: false,
           data: {
-            "json_data": $('#json_data').val()
+            "json_data": json_data
           },
           success: function(data){
               $("#output").empty();
-              $("#output").append(data);
+              $("#output").append(data.is_valid);
+
+              $('#json_data').empty();
+              $('#json_data').val(data.formatted_json);
+
+              // Format the input so syntax highlighting makes sense
+              var pretty = JSON.stringify(parseJSON, undefined, 4);
+              var ugly = document.getElementById('json_data').value;
+              document.getElementById('json_data').value = pretty;
+
           }
       });
     });
