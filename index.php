@@ -213,12 +213,14 @@ if(isset($_GET['validate_json'])){
        echo "JSON is valid according to the schema.";
 
    }catch(\Swaggest\JsonSchema\Exception\ValidationException $e){
-       echo nl2br("JSON validation error: " . $e->getMessage());
-       // var_dump($e);
+       // echo nl2br("JSON validation error: " . $e->getMessage());
+       echo "1<pre>";
+       var_dump($e);
    }catch(\Swaggest\JsonSchema\Exception\TypeException $e1){
-       echo nl2br("JSON validation Type error: " . $e1->getMessage());
-       // echo "<pre>";
+       // echo nl2br("JSON validation Type error: " . $e1->getMessage());
+       echo "2<pre>";
        // var_dump($e1->inspect());
+       var_dump($e1);
    }
    die();
 }
@@ -239,7 +241,7 @@ if(isset($_GET['validate_json'])){
         a{color:white;}
 
         .spacer{height:100px;}
-        .main_content{margin:15px auto; width:80%; max-width:600px; border:1px solid grey; color:white;}
+        .main_content{margin:15px auto; width:80%; max-width:900px; border:1px solid grey; color:white;}
         .content_title{position:relative; top:-10px; left:10px; background-color:1f1f1f; color:grey;}
         .content_title:after { content:"]"; }
         .content_title:before { content:"["; }

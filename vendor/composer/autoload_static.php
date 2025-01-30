@@ -6,39 +6,27 @@ namespace Composer\Autoload;
 
 class ComposerStaticInitc1c6b654b64f4c10c2d9009502a66987
 {
-    public static $files = array (
-        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
-    );
-
     public static $prefixLengthsPsr4 = array (
-        'S' => 
+        'O' => 
         array (
-            'Symfony\\Polyfill\\Mbstring\\' => 26,
-            'Swaggest\\JsonSchema\\' => 20,
-            'Swaggest\\JsonDiff\\' => 18,
-        ),
-        'P' => 
-        array (
-            'PhpLang\\' => 8,
+            'Opis\\Uri\\' => 9,
+            'Opis\\String\\' => 12,
+            'Opis\\JsonSchema\\' => 16,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Symfony\\Polyfill\\Mbstring\\' => 
+        'Opis\\Uri\\' => 
         array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+            0 => __DIR__ . '/..' . '/opis/uri/src',
         ),
-        'Swaggest\\JsonSchema\\' => 
+        'Opis\\String\\' => 
         array (
-            0 => __DIR__ . '/..' . '/swaggest/json-schema/src',
+            0 => __DIR__ . '/..' . '/opis/string/src',
         ),
-        'Swaggest\\JsonDiff\\' => 
+        'Opis\\JsonSchema\\' => 
         array (
-            0 => __DIR__ . '/..' . '/swaggest/json-diff/src',
-        ),
-        'PhpLang\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/phplang/scope-exit/src',
+            0 => __DIR__ . '/..' . '/opis/json-schema/src',
         ),
     );
 

@@ -6,8 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
-    'Swaggest\\JsonSchema\\' => array($vendorDir . '/swaggest/json-schema/src'),
-    'Swaggest\\JsonDiff\\' => array($vendorDir . '/swaggest/json-diff/src'),
-    'PhpLang\\' => array($vendorDir . '/phplang/scope-exit/src'),
+    'Opis\\Uri\\' => array($vendorDir . '/opis/uri/src'),
+    'Opis\\String\\' => array($vendorDir . '/opis/string/src'),
+    'Opis\\JsonSchema\\' => array($vendorDir . '/opis/json-schema/src'),
 );

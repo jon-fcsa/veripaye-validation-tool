@@ -1,5 +1,5 @@
 {
     "require": {
-        "swaggest/json-schema": "^0.12.43"
+        "opis/json-schema": "^2.4"
     }
 }
