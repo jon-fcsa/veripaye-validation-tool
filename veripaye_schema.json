@@ -43,19 +43,152 @@
                                     "type": "object",
                                     "properties": {
                                          "PayDate": {"type": "string"},
-                                         "TaxPeriod": {"type": "string"},
+                                         "TaxPeriod": {"type": "number"},
                                          "TaxPeriodType": {"type": "string"},
-                                         "PeriodsCovered": {"type": "string"}
+                                         "PeriodsCovered": {"type": "number"}
                                     },
                                     "required": ["PayDate", "TaxPeriod", "TaxPeriodType", "PeriodsCovered"],
                                     "additionalProperties": false
                                   },
-
-                                  ...
-
-
+                                  "AssignmentDetails": {
+                                    "type": "object",
+                                    "properties": {
+                                         "AssignmentLines": {
+                                           "type": "array",
+                                           "minItems": 1,
+                                           "items": {
+                                             "AssignmentLine": {
+                                               "type": "object",
+                                               "properties": {
+                                                    "Employer": {"type": "string"},
+                                                    "Rate": {"type": "number"},
+                                                    "Units": {"type": "number"},
+                                                    "Total": {"type": "number"},
+                                                    "Period": {"type": "string"},
+                                                    "PaymentType": {"type": "string"},
+                                                    "DateReceived": {"type": "string"},
+                                                    "InvoiceNo": {"type": "string"},
+                                                    "ClientName": {"type": "string"},
+                                               },
+                                               "required": ["Employer","Rate","Units","Total","Period","PaymentType","DateReceived","InvoiceNo","ClientName"],
+                                               "additionalProperties": false
+                                             }
+                                           },
+                                           "required": ["AssignmentLine"],
+                                           "additionalProperties": false
+                                         },
+                                         "TotalInvoiced": {"type": "number"},
+                                         "TotalExpenses": {"type": "number"},
+                                         "TotalMileage": {"type": "number"},
+                                         "TotalReceived": {"type": "number"},
+                                    },
+                                    "required": ["AssignmentLines","TotalInvoiced","TotalExpenses","TotalMileage","TotalReceived"],
+                                    "additionalProperties": false
+                                  },
+                                  "Deductions": {
+                                    "type": "object",
+                                    "properties": {
+                                         "Margin": {"type": "number"},
+                                         "ApprenticeshipLevy": {"type": "number"},
+                                         "NIERS": {"type": "number"},
+                                         "EmploymentCosts": {"type": "number"},
+                                         "EmployerPension": {"type": "number"},
+                                         "HolidayPay": {"type": "number"},
+                                         "HolidayPayCosts": {"type": "number"},
+                                         "SalarySacrificePension": {"type": "number"},
+                                         "Gift Aid": {"type": "number"},
+                                         "TotalDeducted": {"type": "number"}
+                                    },
+                                    "required": ["Margin", "ApprenticeshipLevy", "NIERS", "EmploymentCosts", "EmployerPension", "HolidayPay", "HolidayPayCosts", "SalarySacrificePension", "Gift Aid", "TotalDeducted"],
+                                    "additionalProperties": false
+                                  },
+                                  "HolidayPay": {
+                                    "type": "object",
+                                    "properties": {
+                                         "Percentage": {"type": "number"},
+                                         "AmountAdvanced": {"type": "number"},
+                                         "AmountAccrued": {"type": "number"},
+                                         "Method": {"type": "string"}
+                                    },
+                                    "required": ["Percentage", "AmountAdvanced", "AmountAccrued", "Method"],
+                                    "additionalProperties": false
+                                  },
+                                  "EmployeePayment": {
+                                    "type": "object",
+                                    "properties": {
+                                         "Rate": {"type": "number"},
+                                         "Hours": {"type": "number"},
+                                         "Total Base": {"type": "number"},
+                                         "Bonus": {"type": "number"},
+                                         "HolidayPay": {"type": "number"},
+                                         "OtherTotal": {"type": "number"},
+                                         "Total": {"type": "number"}
+                                    },
+                                    "required": ["Rate","Hours","Total Base","Bonus","HolidayPay","OtherTotal","Total"],
+                                    "additionalProperties": false
+                                  },
+                                  "EmployeeDeductions": {
+                                    "type": "object",
+                                    "properties": {
+                                         "NI": {"type": "number"},
+                                         "IncomeTax": {"type": "number"},
+                                         "EmployeePension": {"type": "number"},
+                                         "OtherPostTaxDeductions": {
+                                           "type": "array"
+                                           "items": {
+                                             "Item": {
+                                               "type": "object",
+                                               "properties": {
+                                                    "Description": {"type": "string"},
+                                                    "Amount": {"type": "number"}
+                                               },
+                                               "required": ["Description","Amount"],
+                                               "additionalProperties": false
+                                             }
+                                           },
+                                           "required": ["AssignmentLine"],
+                                           "additionalProperties": false
+                                         },
+                                         "StudentLoan": {"type": "number"},
+                                         "PostGradLoan": {"type": "number"}
+                                    },
+                                    "required": ["NI","IncomeTax","EmployeePension","OtherPostTaxDeductions","StudentLoan","PostGradLoan"],
+                                    "additionalProperties": false
+                                  },
+                                  "PaymentSummary": {
+                                    "type": "object",
+                                    "properties": {
+                                         "GrossPay": {"type": "number"},
+                                         "EarningsforNI": {"type": "number"},
+                                         "EarningsforTax": {"type": "number"},
+                                         "Deductions": {"type": "number"},
+                                         "OtherDeductions": {"type": "number"},
+                                         "NetPay": {"type": "number"},
+                                         "ExpensesPaid": {"type": "number"},
+                                         "TotalPaid": {"type": "number"}
+                                    },
+                                    "required": ["GrossPay","EarningsforNI","EarningsforTax","Deductions","OtherDeductions","NetPay","ExpensesPaid","TotalPaid"],
+                                    "additionalProperties": false
+                                  },
+                                  "YTD": {
+                                    "type": "object",
+                                    "properties": {
+                                         "GrossPayYTD": {"type": "number"},
+                                         "EarningsforTax YTD": {"type": "number"},
+                                         "TaxPaidYTD": {"type": "number"},
+                                         "EarningsforNIYTD": {"type": "number"},
+                                         "EmployeeNIYTD": {"type": "number"},
+                                         "EmployerNIYTD": {"type": "number"},
+                                         "EmployeePensionYTD": {"type": "number"},
+                                         "EmployerPensionYTD": {"type": "number"},
+                                         "StudentLoanYTD": {"type": "number"},
+                                         "PostgraduateLoanYTD": {"type": "number"}
+                                    },
+                                    "required": ["GrossPayYTD","EarningsforTax YTD","TaxPaidYTD","EarningsforNIYTD","EmployeeNIYTD","EmployerNIYTD","EmployeePensionYTD","EmployerPensionYTD","StudentLoanYTD","PostgraduateLoanYTD"],
+                                    "additionalProperties": false
+                                  },
                               },
-                              "required": ["PaymeWorkernt", "PaymentPeriod"],
+                              "required": ["Worker","PaymentPeriod","AssignmentDetails","Deductions","HolidayPay","EmployeePayment","EmployeeDeductions","PaymentSummary","YTD"],
                               "additionalProperties": false
                           }
                       },

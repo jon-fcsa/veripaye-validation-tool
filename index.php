@@ -14,7 +14,7 @@ use Opis\JsonSchema\{
 $validator = new Validator();
 
 // Register our schema
-$validator->resolver()->registerFile( 'http://api.example.com/profile.json', './veripaye_schema.json');
+$validator->resolver()->registerFile( 'http://api.example.com/profile.json', __FILE__.'/veripaye_schema.json');
 
 
 // Handle POST request.
