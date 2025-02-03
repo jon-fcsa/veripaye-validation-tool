@@ -28,6 +28,8 @@ if(isset($_GET['validate_json'])){
 
   $data = $_POST['json_data'];
 
+  // "email": "john@example.com",
+
   // "location": {
   //     "country": "US",
   //     "address": "Sesame Street, no. 5"
@@ -37,7 +39,7 @@ if(isset($_GET['validate_json'])){
   {
       "name": "John Doe",
       "age": 31,
-      "email": "john@example.com",
+
       "website": null,
       "location": {
           "country": "US",
@@ -60,7 +62,7 @@ if(isset($_GET['validate_json'])){
           },
           {
               "name": "JavaScript",
-              "value": 75
+              "value": true
           }
       ]
   }
@@ -69,21 +71,19 @@ if(isset($_GET['validate_json'])){
   // Decode $data
   $data = json_decode($data);
 
-  /** @var ValidationResult $result */
+  // ValidationResult $result
   $result = $validator->validate($data, 'http://api.example.com/profile.json');
 
-  if ($result->isValid()) {
-      $is_valid_result = "Valid";
-  } else {
-      // Print errors
-      $is_valid_result = (new ErrorFormatter())->format($result->error());
+  if($result->isValid()){
+      $is_valid_result[] = "Valid";
+  }else{
+      $is_valid_result[] = (new ErrorFormatter())->format($result->error());
   }
 
-  $return_data['is_valid'] = $is_valid_result;
-  // $return_data['formatted_json'] = json_decode($_POST['json_data']);
+  echo "<pre>";
+  var_dump($is_valid_result);
 
-  echo json_encode($return_data, JSON_PRETTY_PRINT);
-
+  //echo json_encode($is_valid_result);
   die();
 }
 ?>
@@ -93,45 +93,7 @@ if(isset($_GET['validate_json'])){
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <title>Veripaye JSON schema validation tool</title>
-
-    <style>
-        *{padding:0; margin:0;}
-        body{background-color:1f1f1f; color-scheme: dark;}
-        input{padding:5px 10px;}
-        button{padding:5px 10px;}
-        button:hover{cursor:pointer;}
-        a{color:white;}
-
-        .spacer{height:100px;}
-        .main_content{margin:15px auto; width:80%; max-width:900px; border:1px solid grey; color:white;}
-        .content_title{position:relative; top:-10px; left:10px; background-color:1f1f1f; color:grey;}
-        .content_title:after { content:"]"; }
-        .content_title:before { content:"["; }
-        .content{padding:20px;}
-        .content a{line-height:18px;}
-        .encode_msg_container, .decode_msg_container{display:none;}
-        .encode_msg, .decode_msg{padding:5px 10px;}
-        .error_msg{background-color:#8a0101;}
-        .warn_msg{background-color:#8a4301;}
-        .ok_msg{background-color:#0c8a01;}
-        .footer_content{margin:0 auto; width:80%; max-width:600px; text-align:right;}
-
-        #json_container{
-          border:1px solid white; background-color:#2b2a33; color:white; font-size:12px;
-        }
-        #json_data{
-          /* white-space: nowrap; */
-          overflow:scroll;
-          width:100%; height:500px;
-        }
-        #short_url{ width:calc(100% - 160px); margin-right:10px; }
-        #validate_json{ width:250px; }
-
-        #encoded_short_url{ width:calc(100% - 160px); margin-right:10px; }
-        #decode_url_btn{ width:150px; }
-        #decoded_short_url{ width:100%; }
-        #output{margin:0 auto; width:100%; height:200px; overflow-y:scroll; border-top:1px solid grey; border-bottom:1px solid grey;}
-    </style>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 <div class="spacer"></div>
@@ -142,12 +104,15 @@ $(function(){
     $('#validate_json').click(function(){
       var json_data = $('#json_data').text();
 
-      // Always format the JSON
-      var parseJSON = JSON.parse(json_data);
-      var pretty = JSON.stringify(parseJSON, undefined, 4);
-      var ugly = document.getElementById('json_data').innerHTML;
+      if(!json_data){
+        console.log();
+        output('No JSON data was entered');
+        return;
+      }
 
-      console.log('json_data',pretty);
+      // Format the input so syntax highlighting makes sense
+      var parseJSON = JSON.parse(json_data);
+      var formatted_json = JSON.stringify(parseJSON, undefined, 4);
 
       $.ajax({
           type: "POST",
@@ -157,15 +122,20 @@ $(function(){
             "json_data": json_data
           },
           success: function(data){
-              $("#output").empty();
-              $("#output").append(data.is_valid);
+              output(data);
 
-              // Format the input so syntax highlighting makes sense
-              document.getElementById('json_data').innerHTML = "";
-              document.getElementById('json_data').innerHTML = pretty;
+              $('#json_data').empty();
+              $('#json_data').html(formatted_json);
           }
       });
+
     });
+
+
+    function output(msg){
+      $("#output").empty();
+      $("#output").append(msg);
+    }
 
 });
 </script>
@@ -177,9 +147,11 @@ $(function(){
         <div id="json_container">
           <pre id="json_data" placeholder="Enter JSON data" contenteditable></pre>
         </div>
-        <br><br><hr><br>
+        <br>
         Output
-        <div id="output"></div>
+        <div id="output_container">
+          <div id="output"></div>
+        </div>
     </div>
 </div>
 
