@@ -16,57 +16,12 @@ use Opis\JsonSchema\{
 $validator = new Validator();
 
 // Register our schema
-$validator->resolver()->registerFile(
-    'http://api.example.com/profile.json',
-    './test_schema.json'
-);
-
-
+$validator->resolver()->registerFile( 'http://api.example.com/profile.json', './test_schema.json');
 
 
 if(isset($_GET['validate_json'])){
 
   $data = $_POST['json_data'];
-
-  // "email": "john@example.com",
-
-  // "location": {
-  //     "country": "US",
-  //     "address": "Sesame Street, no. 5"
-  // },
-
-  $data = <<<'JSON'
-  {
-      "name": "John Doe",
-      "age": 31,
-
-      "website": null,
-      "location": {
-          "country": "US",
-          "address": false
-      },
-      "available_for_hire": true,
-      "interests": ["php", "html", "css", "javascript", "programming", "web design"],
-      "skills": [
-          {
-              "name": "HTML",
-              "value": 100
-          },
-          {
-              "name": "PHP",
-              "value": 55
-          },
-          {
-              "name": "CSS",
-              "value": 99.5
-          },
-          {
-              "name": "JavaScript",
-              "value": true
-          }
-      ]
-  }
-  JSON;
 
   // Decode $data
   $data = json_decode($data);
@@ -75,15 +30,20 @@ if(isset($_GET['validate_json'])){
   $result = $validator->validate($data, 'http://api.example.com/profile.json');
 
   if($result->isValid()){
-      $is_valid_result[] = "Valid";
+      $return_val['error_path'] = false;
+      $return_val['error_msg'] = 'Valid';
   }else{
-      $is_valid_result[] = (new ErrorFormatter())->format($result->error());
+      $is_valid_result = (new ErrorFormatter())->format($result->error());
+
+      reset($is_valid_result);
+      $return_val['error_path'] = key($is_valid_result);
+      $return_val['error_msg'] = current($is_valid_result);
   }
 
-  echo "<pre>";
-  var_dump($is_valid_result);
+  // echo "<pre>";
+  // var_dump($is_valid_result);
 
-  //echo json_encode($is_valid_result);
+  echo json_encode($return_val);
   die();
 }
 ?>
@@ -102,39 +62,48 @@ if(isset($_GET['validate_json'])){
 $(function(){
 
     $('#validate_json').click(function(){
-      var json_data = $('#json_data').text();
+        var json_data = $('#json_data').text();
 
-      if(!json_data){
-        console.log();
-        output('No JSON data was entered');
-        return;
-      }
+        if(!json_data){
+          console.log();
+          output('No JSON data was entered');
+          return;
+        }
 
-      // Format the input so syntax highlighting makes sense
-      var parseJSON = JSON.parse(json_data);
-      var formatted_json = JSON.stringify(parseJSON, undefined, 4);
+        // Format the input so syntax highlighting makes sense
+        var parseJSON = JSON.parse(json_data);
+        var formatted_json = JSON.stringify(parseJSON, undefined, 4);
 
-      $.ajax({
-          type: "POST",
-          url: "index.php?validate_json",
-          cache: false,
-          data: {
-            "json_data": json_data
-          },
-          success: function(data){
-              output(data);
+        $.ajax({
+            type: "POST",
+            url: "index.php?validate_json",
+            cache: false,
+            data: {
+              "json_data": json_data
+            },
+            success: function(data){
+                data = JSON.parse(data);
 
-              $('#json_data').empty();
-              $('#json_data').html(formatted_json);
-          }
-      });
+                if(data.error_path == false){
+                  output(data.error_msg);
+                }else{
 
+                  // Use the error path to highlight the JSON error location
+
+
+                  output(data.error_msg);
+                }
+
+
+                $('#json_data').empty();
+                $('#json_data').html(formatted_json);
+            }
+        });
     });
 
-
     function output(msg){
-      $("#output").empty();
-      $("#output").append(msg);
+        $("#output").empty();
+        $("#output").append(msg);
     }
 
 });
