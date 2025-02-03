@@ -98,6 +98,7 @@ $(function(){
                   var path_targets_index = 1; // start at 1 to skip the first empty string element split() creates
 
                   var detected_error_array_index;
+                  var detected_error_array_count = 0;
                   var brackets_open = false;
 
                   var json_lines_arr = split_lines(formatted_json)
@@ -111,11 +112,26 @@ $(function(){
                       // Handle this differently as opposed to the usual substring check
                       //
                       if(isNumeric(path_targets[path_targets_index])){
+
                           // Bracket counting for now - one level deep
                           detected_error_array_index = Number(path_targets[path_targets_index]);
 
-                          console.log('NUMBER', detected_error_array_index, ' brackets open =', brackets_open);
+                          if(json_lines_arr[i].includes("{")){
+                            brackets_open = true;
+                          }
+                          if(brackets_open && json_lines_arr[i].includes("}")){
+                            detected_error_array_count++;
+                            brackets_open = false;
+                          }
 
+                          if(detected_error_array_index == detected_error_array_count){
+                              console.log('ARR item located');
+
+                              current_target_count++;
+                              path_targets.splice(path_targets_index, 1);
+                          }
+
+                          console.log('NUMBER', detected_error_array_index, 'Count', detected_error_array_count, ' brackets open =', brackets_open);
                           console.log('Checking '+json_lines_arr[i]+' for '+path_targets[path_targets_index]);
 
                       }else{
