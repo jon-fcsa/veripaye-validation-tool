@@ -91,36 +91,64 @@ $(function(){
                   // Use the error path to highlight the JSON error location
                   console.log(data.error_path);
                   var path_targets = data.error_path.split("/");
-
                   console.log("PT", path_targets);
 
+                  var path_target_count = path_targets.length - 1; // The target count at which we'll highlight an error
+                  var current_target_count = 0;
+                  var path_targets_index = 1; // start at 1 to skip the first empty string element split() creates
 
-                  // console.log();
-                  // console.log(formatted_json);
-                  // console.log();
+                  var detected_error_array_index;
+                  var brackets_open = false;
 
                   var json_lines_arr = split_lines(formatted_json)
                   for(var i = 0; i < json_lines_arr.length; i++){
 
-                      if(i == 0){
-                        json_lines_arr[i] = '<div class="highlight">'+json_lines_arr[i]+'</mark>';
+                      // Instead of constantly iterating over the target path
+                      // Compare the current target path item against each line - looking for a match
+                      // If one is found increase the count and delete the match
+                      //
+                      // If the path contains a number then its an element in an array that has an issue
+                      // Handle this differently as opposed to the usual substring check
+                      //
+                      if(isNumeric(path_targets[path_targets_index])){
+                          // Bracket counting for now - one level deep
+                          detected_error_array_index = Number(path_targets[path_targets_index]);
+
+                          console.log('NUMBER', detected_error_array_index, ' brackets open =', brackets_open);
+
+                          console.log('Checking '+json_lines_arr[i]+' for '+path_targets[path_targets_index]);
+
+                      }else{
+
+                          if(json_lines_arr[i].includes(path_targets[path_targets_index])){
+                              console.log('MATCHED '+json_lines_arr[i]+' for '+path_targets[path_targets_index]);
+
+                              current_target_count++;
+                              path_targets.splice(path_targets_index, 1);
+                              // path_targets_index++;
+                          }
+                          console.log('Checking '+json_lines_arr[i]+' for '+path_targets[path_targets_index]);
                       }
 
-                      // console.log(json_lines_arr[i]);
+
+                      if(current_target_count == path_target_count){
+                        json_lines_arr[i] = '<div class="highlight">'+json_lines_arr[i]+'</mark>';
+                        break;
+                      }
                   }
-                  // console.log();
 
 
                   var joined = join_lines(json_lines_arr);
                   // console.log();
                   // console.log(joined);
 
+                  formatted_json = joined;
                   output(data.error_msg);
                 }
 
 
                 $('#json_data').empty();
-                $('#json_data').html(joined);
+                $('#json_data').html(formatted_json);
             }
         });
     });
@@ -130,6 +158,12 @@ $(function(){
     }
     function join_lines(arr){
       return arr.join("\n");
+    }
+
+    function isNumeric(str) {
+      if (typeof str != "string") return false // we only process strings!
+      return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
+             !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
     }
 
     function output(msg){
@@ -145,38 +179,7 @@ $(function(){
     <div class="content">
         <button id="validate_json">Validate JSON Sechema</button><br><br>
         <div id="json_container">
-          <pre id="json_data" placeholder="Enter JSON data" contenteditable>
-{
-    "name": "John Doe",
-    "age": 31,
-    "email": "john@example.com",
-    "website": null,
-    "location": {
-        "country": "US",
-        "address": false
-    },
-    "available_for_hire": true,
-    "interests": ["php", "html", "css", "javascript", "programming", "web design"],
-    "skills": [
-        {
-            "name": "HTML",
-            "value": 100
-        },
-        {
-            "name": "PHP",
-            "value": 55
-        },
-        {
-            "name": "CSS",
-            "value": 99.5
-        },
-        {
-            "name": "JavaScript",
-            "value": true
-        }
-    ]
-}
-          </pre>
+          <pre id="json_data" placeholder="Enter JSON data" contenteditable></pre>
         </div>
         <br>
         Output
