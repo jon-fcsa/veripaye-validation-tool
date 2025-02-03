@@ -116,7 +116,14 @@ if(isset($_GET['validate_json'])){
         .ok_msg{background-color:#0c8a01;}
         .footer_content{margin:0 auto; width:80%; max-width:600px; text-align:right;}
 
-        #json_data{ width:100%; height:500px;}
+        #json_container{
+          border:1px solid white; background-color:#2b2a33; color:white; font-size:12px;
+        }
+        #json_data{
+          /* white-space: nowrap; */
+          overflow:scroll;
+          width:100%; height:500px;
+        }
         #short_url{ width:calc(100% - 160px); margin-right:10px; }
         #validate_json{ width:250px; }
 
@@ -133,12 +140,18 @@ if(isset($_GET['validate_json'])){
 $(function(){
 
     $('#validate_json').click(function(){
-      var json_data = $('#json_data').val();
+      var json_data = $('#json_data').text();
+
+      // Always format the JSON
       var parseJSON = JSON.parse(json_data);
+      var pretty = JSON.stringify(parseJSON, undefined, 4);
+      var ugly = document.getElementById('json_data').innerHTML;
+
+      console.log('json_data',pretty);
 
       $.ajax({
           type: "POST",
-          url: "test.php?validate_json",
+          url: "index.php?validate_json",
           cache: false,
           data: {
             "json_data": json_data
@@ -147,14 +160,9 @@ $(function(){
               $("#output").empty();
               $("#output").append(data.is_valid);
 
-              $('#json_data').empty();
-              $('#json_data').val(data.formatted_json);
-
               // Format the input so syntax highlighting makes sense
-              var pretty = JSON.stringify(parseJSON, undefined, 4);
-              var ugly = document.getElementById('json_data').value;
-              document.getElementById('json_data').value = pretty;
-
+              document.getElementById('json_data').innerHTML = "";
+              document.getElementById('json_data').innerHTML = pretty;
           }
       });
     });
@@ -166,7 +174,9 @@ $(function(){
     <span class="content_title"> Veripaye JSON schema validation tool</span>
     <div class="content">
         <button id="validate_json">Validate JSON Sechema</button><br><br>
-        <textarea id="json_data" placeholder="Enter JSON data"></textarea>
+        <div id="json_container">
+          <pre id="json_data" placeholder="Enter JSON data" contenteditable></pre>
+        </div>
         <br><br><hr><br>
         Output
         <div id="output"></div>
