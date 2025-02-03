@@ -4,8 +4,6 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 require("./vendor/autoload.php");
-// use Swaggest\JsonSchema\Schema;
-
 use Opis\JsonSchema\{
     Validator,
     ValidationResult,
@@ -19,37 +17,25 @@ $validator = new Validator();
 $validator->resolver()->registerFile( 'http://api.example.com/profile.json', './test_schema.json');
 
 
+// Handle POST request.
+//
 if(isset($_GET['validate_json'])){
 
   $data = $_POST['json_data'];
-
-  // // Do basic validation first before checking the schema
-  // if(json_validate($data == false){
-  //   $return_val['error_path'] = false;
-  //   $return_val['error_msg'] = 'The JSON data you entered is not valid, please double check your brackets, trailing commas and ensure each attribute has a value.';
-  //   echo json_encode($return_val);
-  //   die();
-  // }
-
-  // Decode $data
   $data = json_decode($data);
 
-  // ValidationResult $result
   $result = $validator->validate($data, 'http://api.example.com/profile.json');
 
   if($result->isValid()){
       $return_val['error_path'] = false;
       $return_val['error_msg'] = 'Valid';
   }else{
-      $is_valid_result = (new ErrorFormatter())->format($result->error());
+      $is_valid_result = (new ErrorFormatter())->format($result->error()); // Get error details for the front-end to use
 
       reset($is_valid_result);
       $return_val['error_path'] = key($is_valid_result);
       $return_val['error_msg'] = current($is_valid_result);
   }
-
-  // echo "<pre>";
-  // var_dump($is_valid_result);
 
   echo json_encode($return_val);
   die();
@@ -148,6 +134,8 @@ $(function(){
 
                               current_target_count++;
                               path_targets.splice(path_targets_index, 1);
+
+                              i++; // because we want to highlight the next item as thats the actual opening bracket we care about
                           }
 
                           console.log('NUMBER', detected_error_array_index, 'Count', detected_error_array_count, ' brackets open =', brackets_open);
