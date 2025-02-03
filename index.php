@@ -16,14 +16,12 @@ $validator = new Validator();
 // Register our schema
 $validator->resolver()->registerFile( 'http://api.example.com/profile.json', dirname(__FILE__).'/veripaye_schema.json');
 
-
 // Handle POST request.
 //
 if(isset($_GET['validate_json'])){
 
   $data = $_POST['json_data'];
   $data = json_decode($data);
-
   $result = $validator->validate($data, 'http://api.example.com/profile.json');
 
   if($result->isValid()){
@@ -60,20 +58,19 @@ $(function(){
         var json_data = $('#json_data').text();
 
         if(!json_data){
-          console.log();
-          output('No JSON data was entered');
-          return;
+            output('No JSON data was entered');
+            return;
         }
 
         // Catch any syntax errors before looking for schema errors
         try{
-          var parseJSON = JSON.parse(json_data);
+            var parseJSON = JSON.parse(json_data);
         }catch(e){
-          if((e instanceof SyntaxError)){
-            $('#json_container').css('background-color', '#520e0e');
-            output(e.name+"<br>"+e.message+"<br><br>Check for unclosed brackets, trailing commas and missing values.");
-          }
-          return;
+            if((e instanceof SyntaxError)){
+                $('#json_container').css('background-color', '#520e0e');
+                output(e.name+"<br>"+e.message+"<br><br>Check for unclosed brackets, trailing commas and missing values.");
+            }
+            return;
         }
 
         // Format the input so syntax highlighting makes sense
@@ -83,97 +80,85 @@ $(function(){
             type: "POST",
             url: "index.php?validate_json",
             cache: false,
-            data: {
-              "json_data": json_data
+            data:{
+                "json_data": json_data
             },
             success: function(data){
                 data = JSON.parse(data);
 
                 if(data.error_path == false){
-                  output(data.error_msg);
+                    output(data.error_msg);
                 }else{
+                    // Use the error path to highlight the JSON error location
+                    var path_targets = data.error_path.split("/");
+                    console.log("PT", path_targets);
 
-                  // Use the error path to highlight the JSON error location
-                  console.log(data.error_path);
-                  var path_targets = data.error_path.split("/");
-                  console.log("PT", path_targets);
+                    var path_target_count = path_targets.length - 1; // The target count at which we'll highlight an error
+                    var current_target_count = 0;
+                    var path_targets_index = 1; // start at 1 to skip the first empty string element split() creates
 
-                  var path_target_count = path_targets.length - 1; // The target count at which we'll highlight an error
-                  var current_target_count = 0;
-                  var path_targets_index = 1; // start at 1 to skip the first empty string element split() creates
+                    var detected_error_array_index;
+                    var detected_error_array_count = 0;
+                    var brackets_open = false;
 
-                  var detected_error_array_index;
-                  var detected_error_array_count = 0;
-                  var brackets_open = false;
+                    var json_lines_arr = split_lines(formatted_json)
+                    for(var i = 0; i < json_lines_arr.length; i++){
 
-                  var json_lines_arr = split_lines(formatted_json)
-                  for(var i = 0; i < json_lines_arr.length; i++){
+                        // Instead of constantly iterating over the target path
+                        // Compare the current target path item against each line - looking for a match
+                        // If one is found increase the count and delete the match
+                        //
+                        // If the path contains a number then its an element in an array that has an issue
+                        // Handle this differently as opposed to the usual substring check
+                        //
+                        if(isNumeric(path_targets[path_targets_index])){
 
-                      // Instead of constantly iterating over the target path
-                      // Compare the current target path item against each line - looking for a match
-                      // If one is found increase the count and delete the match
-                      //
-                      // If the path contains a number then its an element in an array that has an issue
-                      // Handle this differently as opposed to the usual substring check
-                      //
-                      if(isNumeric(path_targets[path_targets_index])){
+                            // Bracket counting for now - one level deep
+                            detected_error_array_index = Number(path_targets[path_targets_index]);
 
-                          // Bracket counting for now - one level deep
-                          detected_error_array_index = Number(path_targets[path_targets_index]);
+                            if(json_lines_arr[i].includes("{")){
+                                brackets_open = true;
+                            }
+                            if(brackets_open && json_lines_arr[i].includes("}")){
+                                detected_error_array_count++;
+                                brackets_open = false;
+                            }
 
-                          if(json_lines_arr[i].includes("{")){
-                            brackets_open = true;
-                          }
-                          if(brackets_open && json_lines_arr[i].includes("}")){
-                            detected_error_array_count++;
-                            brackets_open = false;
-                          }
+                            if(detected_error_array_index == detected_error_array_count){
+                                console.log('ARR item located');
 
-                          if(detected_error_array_index == detected_error_array_count){
-                              console.log('ARR item located');
+                                current_target_count++;
+                                path_targets.splice(path_targets_index, 1);
 
-                              current_target_count++;
-                              path_targets.splice(path_targets_index, 1);
+                                i++; // because we want to highlight the next item as thats the actual opening bracket we care about
+                            }
 
-                              i++; // because we want to highlight the next item as thats the actual opening bracket we care about
-                          }
+                            console.log('NUMBER', detected_error_array_index, 'Count', detected_error_array_count, ' brackets open =', brackets_open);
+                            console.log('Checking '+json_lines_arr[i]+' for '+path_targets[path_targets_index]);
+                        }else{
 
-                          console.log('NUMBER', detected_error_array_index, 'Count', detected_error_array_count, ' brackets open =', brackets_open);
-                          console.log('Checking '+json_lines_arr[i]+' for '+path_targets[path_targets_index]);
+                            if(json_lines_arr[i].includes(path_targets[path_targets_index])){
+                                console.log('MATCHED '+json_lines_arr[i]+' for '+path_targets[path_targets_index]);
 
-                      }else{
+                                current_target_count++;
+                                path_targets.splice(path_targets_index, 1);
+                            }
+                            console.log('Checking '+json_lines_arr[i]+' for '+path_targets[path_targets_index]);
+                        }
 
-                          if(json_lines_arr[i].includes(path_targets[path_targets_index])){
-                              console.log('MATCHED '+json_lines_arr[i]+' for '+path_targets[path_targets_index]);
+                        if(current_target_count == path_target_count){
+                            json_lines_arr[i] = '<div class="highlight">'+json_lines_arr[i]+'</div>';
+                            break;
+                        }
+                    }
 
-                              current_target_count++;
-                              path_targets.splice(path_targets_index, 1);
-                              // path_targets_index++;
-                          }
-                          console.log('Checking '+json_lines_arr[i]+' for '+path_targets[path_targets_index]);
-                      }
-
-
-                      if(current_target_count == path_target_count){
-                        json_lines_arr[i] = '<div class="highlight">'+json_lines_arr[i]+'</div>';
-                        // json_lines_arr[i] = '<mark>'+json_lines_arr[i]+'</mark>';
-                        break;
-                      }
-                  }
-
-
-                  var joined = join_lines(json_lines_arr);
-                  // console.log();
-                  // console.log(joined);
-
-                  formatted_json = joined;
-                  output(data.error_msg);
+                    formatted_json = join_lines(json_lines_arr);
+                    output(data.error_msg);
                 }
 
                 if(data.error_msg == "Valid"){
                   $('#json_container').css('background-color', '#284028');
                 }
-
 
                 $('#json_data').empty();
                 $('#json_data').html(formatted_json);
@@ -198,7 +183,6 @@ $(function(){
         $("#output").empty();
         $("#output").append(msg);
     }
-
 });
 </script>
 
