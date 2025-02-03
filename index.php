@@ -14,7 +14,7 @@ use Opis\JsonSchema\{
 $validator = new Validator();
 
 // Register our schema
-$validator->resolver()->registerFile( 'http://api.example.com/profile.json', './test_schema.json');
+$validator->resolver()->registerFile( 'http://api.example.com/profile.json', './veripaye_schema.json');
 
 
 // Handle POST request.
@@ -203,7 +203,7 @@ $(function(){
 </script>
 
 <div class="main_content">
-    <span class="content_title"> Veripaye JSON schema validation tool</span>
+    <span class="content_title"> Veripaye JSON validation tool</span>
     <div class="content">
         <button id="validate_json">Validate JSON syntax and schema</button><br><br>
         <div id="json_container">

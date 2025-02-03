@@ -1,0 +1,73 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "properties": {
+      "Umbrella Payment": {
+          "type": "object",
+          "properties": {
+              "Umbrella Details": {
+                  "type": "object",
+                  "properties": {
+                       "Name": {"type": "string"},
+                       "Software": {"type": "string"},
+                       "TaxOfficeNo": {"type": "string"},
+                       "TaxOfficeReference": {"type": "string"}
+                  },
+                  "required": ["Name", "Software", "TaxOfficeNo", "TaxOfficeReference"],
+                  "additionalProperties": false
+              },
+              "Payments": {
+                  "type": "array",
+                  "minItems": 1,
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                          "Payment": {
+                              "type": "object",
+                              "properties": {
+                                  "Worker": {
+                                      "type": "object",
+                                      "properties": {
+                                           "NI": {"type": "string"},
+                                           "NICategory": {"type": "string"},
+                                           "TaxCode": {"type": "string"},
+                                           "DateOfBirth": {"type": "string"},
+                                           "W1M1": {"type": "boolean"},
+                                           "EmployeeId": {"type": "string"},
+                                           "Email": {"type": "string", "format": "email"}
+                                      },
+                                      "required": ["NI", "NICategory", "TaxCode", "DateOfBirth", "W1M1", "EmployeeId", "Email"],
+                                      "additionalProperties": false
+                                  },
+                                  "PaymentPeriod": {
+                                    "type": "object",
+                                    "properties": {
+                                         "PayDate": {"type": "string"},
+                                         "TaxPeriod": {"type": "string"},
+                                         "TaxPeriodType": {"type": "string"},
+                                         "PeriodsCovered": {"type": "string"}
+                                    },
+                                    "required": ["PayDate", "TaxPeriod", "TaxPeriodType", "PeriodsCovered"],
+                                    "additionalProperties": false
+                                  },
+
+                                  ...
+
+
+                              },
+                              "required": ["PaymeWorkernt", "PaymentPeriod"],
+                              "additionalProperties": false
+                          }
+                      },
+                      "required": ["Payment"],
+                      "additionalProperties": false
+                  }
+              }
+          },
+          "required": ["Umbrella Details", "Payments"],
+          "additionalProperties": false
+      }
+    },
+    "required": ["Umbrella Payment"],
+    "additionalProperties": false
+}
