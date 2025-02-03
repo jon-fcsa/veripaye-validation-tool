@@ -89,17 +89,48 @@ $(function(){
                 }else{
 
                   // Use the error path to highlight the JSON error location
+                  console.log(data.error_path);
+                  var path_targets = data.error_path.split("/");
 
+                  console.log("PT", path_targets);
+
+
+                  // console.log();
+                  // console.log(formatted_json);
+                  // console.log();
+
+                  var json_lines_arr = split_lines(formatted_json)
+                  for(var i = 0; i < json_lines_arr.length; i++){
+
+                      if(i == 0){
+                        json_lines_arr[i] = '<div class="highlight">'+json_lines_arr[i]+'</mark>';
+                      }
+
+                      // console.log(json_lines_arr[i]);
+                  }
+                  // console.log();
+
+
+                  var joined = join_lines(json_lines_arr);
+                  // console.log();
+                  // console.log(joined);
 
                   output(data.error_msg);
                 }
 
 
                 $('#json_data').empty();
-                $('#json_data').html(formatted_json);
+                $('#json_data').html(joined);
             }
         });
     });
+
+    function split_lines(str){
+      return str.split(/\r?\n/);
+    }
+    function join_lines(arr){
+      return arr.join("\n");
+    }
 
     function output(msg){
         $("#output").empty();
@@ -114,7 +145,38 @@ $(function(){
     <div class="content">
         <button id="validate_json">Validate JSON Sechema</button><br><br>
         <div id="json_container">
-          <pre id="json_data" placeholder="Enter JSON data" contenteditable></pre>
+          <pre id="json_data" placeholder="Enter JSON data" contenteditable>
+{
+    "name": "John Doe",
+    "age": 31,
+    "email": "john@example.com",
+    "website": null,
+    "location": {
+        "country": "US",
+        "address": false
+    },
+    "available_for_hire": true,
+    "interests": ["php", "html", "css", "javascript", "programming", "web design"],
+    "skills": [
+        {
+            "name": "HTML",
+            "value": 100
+        },
+        {
+            "name": "PHP",
+            "value": 55
+        },
+        {
+            "name": "CSS",
+            "value": 99.5
+        },
+        {
+            "name": "JavaScript",
+            "value": true
+        }
+    ]
+}
+          </pre>
         </div>
         <br>
         Output
