@@ -68,7 +68,7 @@
                                                     "PaymentType": {"type": "string"},
                                                     "DateReceived": {"type": "string"},
                                                     "InvoiceNo": {"type": "string"},
-                                                    "ClientName": {"type": "string"},
+                                                    "ClientName": {"type": "string"}
                                                },
                                                "required": ["Employer","Rate","Units","Total","Period","PaymentType","DateReceived","InvoiceNo","ClientName"],
                                                "additionalProperties": false
@@ -80,7 +80,7 @@
                                          "TotalInvoiced": {"type": "number"},
                                          "TotalExpenses": {"type": "number"},
                                          "TotalMileage": {"type": "number"},
-                                         "TotalReceived": {"type": "number"},
+                                         "TotalReceived": {"type": "number"}
                                     },
                                     "required": ["AssignmentLines","TotalInvoiced","TotalExpenses","TotalMileage","TotalReceived"],
                                     "additionalProperties": false
@@ -134,7 +134,7 @@
                                          "IncomeTax": {"type": "number"},
                                          "EmployeePension": {"type": "number"},
                                          "OtherPostTaxDeductions": {
-                                           "type": "array"
+                                           "type": "array",
                                            "items": {
                                              "Item": {
                                                "type": "object",
@@ -186,7 +186,9 @@
                                     },
                                     "required": ["GrossPayYTD","EarningsforTax YTD","TaxPaidYTD","EarningsforNIYTD","EmployeeNIYTD","EmployerNIYTD","EmployeePensionYTD","EmployerPensionYTD","StudentLoanYTD","PostgraduateLoanYTD"],
                                     "additionalProperties": false
-                                  },
+                                  }
+
+                                  
                               },
                               "required": ["Worker","PaymentPeriod","AssignmentDetails","Deductions","HolidayPay","EmployeePayment","EmployeeDeductions","PaymentSummary","YTD"],
                               "additionalProperties": false
