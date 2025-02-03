@@ -205,7 +205,7 @@ $(function(){
 <div class="main_content">
     <span class="content_title"> Veripaye JSON schema validation tool</span>
     <div class="content">
-        <button id="validate_json">Validate JSON Sechema</button><br><br>
+        <button id="validate_json">Validate JSON syntax and schema</button><br><br>
         <div id="json_container">
           <pre id="json_data" placeholder="Enter JSON data" contenteditable></pre>
         </div>
