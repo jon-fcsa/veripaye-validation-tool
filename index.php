@@ -23,6 +23,14 @@ if(isset($_GET['validate_json'])){
 
   $data = $_POST['json_data'];
 
+  // // Do basic validation first before checking the schema
+  // if(json_validate($data == false){
+  //   $return_val['error_path'] = false;
+  //   $return_val['error_msg'] = 'The JSON data you entered is not valid, please double check your brackets, trailing commas and ensure each attribute has a value.';
+  //   echo json_encode($return_val);
+  //   die();
+  // }
+
   // Decode $data
   $data = json_decode($data);
 
@@ -62,6 +70,7 @@ if(isset($_GET['validate_json'])){
 $(function(){
 
     $('#validate_json').click(function(){
+        $('#json_container').css('background-color', '#2b2a33');
         var json_data = $('#json_data').text();
 
         if(!json_data){
@@ -70,8 +79,18 @@ $(function(){
           return;
         }
 
+        // Catch any syntax errors before looking for schema errors
+        try{
+          var parseJSON = JSON.parse(json_data);
+        }catch(e){
+          if((e instanceof SyntaxError)){
+            $('#json_container').css('background-color', '#520e0e');
+            output(e.name+"<br>"+e.message+"<br><br>Check for unclosed brackets, trailing commas and missing values.");
+          }
+          return;
+        }
+
         // Format the input so syntax highlighting makes sense
-        var parseJSON = JSON.parse(json_data);
         var formatted_json = JSON.stringify(parseJSON, undefined, 4);
 
         $.ajax({
@@ -148,7 +167,8 @@ $(function(){
 
 
                       if(current_target_count == path_target_count){
-                        json_lines_arr[i] = '<div class="highlight">'+json_lines_arr[i]+'</mark>';
+                        json_lines_arr[i] = '<div class="highlight">'+json_lines_arr[i]+'</div>';
+                        // json_lines_arr[i] = '<mark>'+json_lines_arr[i]+'</mark>';
                         break;
                       }
                   }
@@ -160,6 +180,10 @@ $(function(){
 
                   formatted_json = joined;
                   output(data.error_msg);
+                }
+
+                if(data.error_msg == "Valid"){
+                  $('#json_container').css('background-color', '#284028');
                 }
 
 
