@@ -1,0 +1,104 @@
+{
+  "Umbrella Payment": {
+    "Umbrella Details": {
+      "veriPAYEClientID": "abc",
+      "Name": "Deckard Umbrella LLC",
+      "Software": "BladeRunner Technologies",
+      "TaxOfficeNo": "12345",
+      "TaxOfficeReference": "FCSA2313"
+    },
+    "Payments": [
+      {
+        "Payment": {
+          "Worker": {
+            "NI": "DC807651J",
+            "NICategory": "M",
+            "TaxCode": "1257L",
+            "DateOfBirth": "2001-07-04",
+            "W1M1": false,
+            "EmployeeId": "099889",
+            "Email": "FCSAWorker@fcsa.org.uk"
+          },
+          "PaymentPeriod": {
+            "PayDate": "13/12/2024",
+            "TaxPeriod": 36,
+            "TaxYear": "2025",
+            "TaxPeriodType": "W",
+            "PeriodsCovered": 1
+          },
+          "AssignmentDetails": {
+            "AssignmentLines": [
+              {}
+            ],
+            "TotalInvoiced": 0,
+            "TotalExpenses": 0,
+            "TotalMileage": 0,
+            "TotalReceived": 0
+          },
+          "Deductions": {
+            "Margin": 0,
+            "ApprenticeshipLevy": 0,
+            "NIERS": 0,
+            "EmploymentCosts": 0,
+            "EmployerPension": 0,
+            "HolidayPay": 0,
+            "HolidayPayCosts": 0,
+            "SalarySacrificePension": 0,
+            "Gift Aid": 0,
+            "TotalDeducted": 0
+          },
+          "HolidayPay": {
+            "Percentage": 12.07,
+            "AmountAdvanced": 417.68,
+            "AmountAccrued": 0,
+            "Method": "Advanced",
+            "TotalAccrued": 0,
+            "TotalAccruedCosts": 0
+          },
+          "EmployeePayment": {
+            "Rate": 0,
+            "Hours": 0,
+            "TotalBase": 0,
+            "Bonus": 0,
+            "HolidayPay": 417.68,
+            "Other": [],
+            "OtherTotal": 0,
+            "Total": 417.68
+          },
+          "EmployeeDeductions": {
+            "NI": 33.42,
+            "IncomeTax": 83.4,
+            "HolidayPayRetained": 0,
+            "StudentLoan": 0,
+            "EmployeePension": 0,
+            "PostGradLoan": 0,
+            "OtherPostTaxDeductions": [],
+            "OtherTotal": 0
+          },
+          "PaymentSummary": {
+            "GrossPay": 417.68,
+            "EarningsForNI": 417.68,
+            "EarningsForTax": 417.68,
+            "Deductions": 116.82,
+            "NetPay": 300.86,
+            "OtherDeductions": 0,
+            "ExpensesPaid": 0,
+            "TotalPaid": 300.86
+          },
+          "YTD": {
+            "GrossPayYTD": 116654.9,
+            "EarningsForTaxYTD": 0,
+            "TaxPaidYTD": 29496.35,
+            "EarningsForNIYTD": 94651.9,
+            "EmployeeNIYTD": 3246.12,
+            "EmployerNIYTD": 12216.91,
+            "EmployeePensionYTD": 0,
+            "EmployerPensionYTD": 0,
+            "StudentLoanYTD": 0,
+            "PostgraduateLoanYTD": 0
+          }
+        }
+      }
+    ]
+  }
+}

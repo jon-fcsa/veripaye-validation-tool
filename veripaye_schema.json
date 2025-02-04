@@ -115,9 +115,11 @@
                                          "Percentage": {"type": "number"},
                                          "AmountAdvanced": {"type": "number"},
                                          "AmountAccrued": {"type": "number"},
-                                         "Method": {"type": "string"}
+                                         "Method": {"type": "string"},
+                                         "TotalAccrued": {"type": "number"},
+                                         "TotalAccruedCosts": {"type": "number"}
                                     },
-                                    "required": ["Percentage", "AmountAdvanced", "AmountAccrued", "Method"],
+                                    "required": ["Percentage", "AmountAdvanced", "AmountAccrued", "Method", "TotalAccrued", "TotalAccruedCosts"],
                                     "additionalProperties": false
                                   },
                                   "EmployeePayment": {
@@ -125,21 +127,29 @@
                                     "properties": {
                                          "Rate": {"type": "number"},
                                          "Hours": {"type": "number"},
-                                         "Total Base": {"type": "number"},
+                                         "TotalBase": {"type": "number"},
                                          "Bonus": {"type": "number"},
                                          "HolidayPay": {"type": "number"},
+                                         "Other": {
+                                           "type": "array"
+
+
+                                         },
                                          "OtherTotal": {"type": "number"},
                                          "Total": {"type": "number"}
                                     },
-                                    "required": ["Rate","Hours","Total Base","Bonus","HolidayPay","OtherTotal","Total"],
+                                    "required": ["Rate","Hours","TotalBase","Bonus","HolidayPay","OtherTotal","Total"],
                                     "additionalProperties": false
                                   },
                                   "EmployeeDeductions": {
                                     "type": "object",
                                     "properties": {
                                          "NI": {"type": "number"},
-                                         "IncomeTax": {"type": "number"},
                                          "EmployeePension": {"type": "number"},
+                                         "IncomeTax": {"type": "number"},
+                                         "HolidayPayRetained": {"type": "number"},
+                                         "StudentLoan": {"type": "number"},
+                                         "PostGradLoan": {"type": "number"},
                                          "OtherPostTaxDeductions": {
                                            "type": "array",
                                            "items": {
@@ -156,34 +166,33 @@
                                            "required": ["AssignmentLine"],
                                            "additionalProperties": false
                                          },
-                                         "StudentLoan": {"type": "number"},
-                                         "PostGradLoan": {"type": "number"}
+                                         "OtherTotal": {"type": "number"}
                                     },
-                                    "required": ["NI","IncomeTax","EmployeePension","OtherPostTaxDeductions","StudentLoan","PostGradLoan"],
+                                    "required": ["NI","EmployeePension","IncomeTax","HolidayPayRetained","StudentLoan","PostGradLoan","OtherPostTaxDeductions","OtherTotal"],
                                     "additionalProperties": false
                                   },
                                   "PaymentSummary": {
                                     "type": "object",
                                     "properties": {
                                          "GrossPay": {"type": "number"},
-                                         "EarningsforNI": {"type": "number"},
-                                         "EarningsforTax": {"type": "number"},
+                                         "EarningsForNI": {"type": "number"},
+                                         "EarningsForTax": {"type": "number"},
                                          "Deductions": {"type": "number"},
                                          "OtherDeductions": {"type": "number"},
                                          "NetPay": {"type": "number"},
                                          "ExpensesPaid": {"type": "number"},
                                          "TotalPaid": {"type": "number"}
                                     },
-                                    "required": ["GrossPay","EarningsforNI","EarningsforTax","Deductions","OtherDeductions","NetPay","ExpensesPaid","TotalPaid"],
+                                    "required": ["GrossPay","EarningsForNI","EarningsForTax","Deductions","OtherDeductions","NetPay","ExpensesPaid","TotalPaid"],
                                     "additionalProperties": false
                                   },
                                   "YTD": {
                                     "type": "object",
                                     "properties": {
                                          "GrossPayYTD": {"type": "number"},
-                                         "EarningsforTax YTD": {"type": "number"},
+                                         "EarningsForTaxYTD": {"type": "number"},
                                          "TaxPaidYTD": {"type": "number"},
-                                         "EarningsforNIYTD": {"type": "number"},
+                                         "EarningsForNIYTD": {"type": "number"},
                                          "EmployeeNIYTD": {"type": "number"},
                                          "EmployerNIYTD": {"type": "number"},
                                          "EmployeePensionYTD": {"type": "number"},
@@ -191,7 +200,7 @@
                                          "StudentLoanYTD": {"type": "number"},
                                          "PostgraduateLoanYTD": {"type": "number"}
                                     },
-                                    "required": ["GrossPayYTD","EarningsforTax YTD","TaxPaidYTD","EarningsforNIYTD","EmployeeNIYTD","EmployerNIYTD","EmployeePensionYTD","EmployerPensionYTD","StudentLoanYTD","PostgraduateLoanYTD"],
+                                    "required": ["GrossPayYTD","EarningsForTaxYTD","TaxPaidYTD","EarningsForNIYTD","EmployeeNIYTD","EmployerNIYTD","EmployeePensionYTD","EmployerPensionYTD","StudentLoanYTD","PostgraduateLoanYTD"],
                                     "additionalProperties": false
                                   }
 
