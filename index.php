@@ -91,7 +91,13 @@ $(function(){
                 }else{
                     // Use the error path to highlight the JSON error location
                     var path_targets = data.error_path.split("/");
-                    console.log("PT", path_targets);
+                    console.log("PT1", path_targets);
+
+                    // converet html entites back to what they were so matching doesn't break.
+                    for(var i = 0; i < path_targets.length; i++){
+                        path_targets[i] = decodeURIComponent(path_targets[i]);
+                    }
+                    console.log("PT2", path_targets);
 
                     var path_target_count = path_targets.length - 1; // The target count at which we'll highlight an error
                     var current_target_count = 0;
@@ -124,6 +130,7 @@ $(function(){
                                 brackets_open = false;
                             }
 
+                            //if(detected_error_array_index == detected_error_array_count || detected_error_array_index == 0){
                             if(detected_error_array_index == detected_error_array_count){
                                 console.log('ARR item located');
 
@@ -183,6 +190,7 @@ $(function(){
         $("#output").empty();
         $("#output").append(msg);
     }
+
 });
 </script>
 
