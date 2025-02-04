@@ -8,12 +8,13 @@
               "Umbrella Details": {
                   "type": "object",
                   "properties": {
+                       "veriPAYEClientID": {"type": "string"},
                        "Name": {"type": "string"},
                        "Software": {"type": "string"},
                        "TaxOfficeNo": {"type": "string"},
                        "TaxOfficeReference": {"type": "string"}
                   },
-                  "required": ["Name", "Software", "TaxOfficeNo", "TaxOfficeReference"],
+                  "required": ["veriPAYEClientID", "Name", "Software", "TaxOfficeNo", "TaxOfficeReference"],
                   "additionalProperties": false
               },
               "Payments": {
@@ -31,7 +32,7 @@
                                            "NI": {"type": "string"},
                                            "NICategory": {"type": "string"},
                                            "TaxCode": {"type": "string"},
-                                           "DateOfBirth": {"type": "string"},
+                                           "DateOfBirth": {"type": "string", "format": "date"},
                                            "W1M1": {"type": "boolean"},
                                            "EmployeeId": {"type": "string"},
                                            "Email": {"type": "string", "format": "email"}
@@ -45,7 +46,8 @@
                                          "PayDate": {"type": "string"},
                                          "TaxPeriod": {"type": "number"},
                                          "TaxPeriodType": {"type": "string"},
-                                         "PeriodsCovered": {"type": "number"}
+                                         "PeriodsCovered": {"type": "number"},
+                                         "Reissued": {"type": "boolean"}
                                     },
                                     "required": ["PayDate", "TaxPeriod", "TaxPeriodType", "PeriodsCovered"],
                                     "additionalProperties": false
@@ -61,6 +63,7 @@
                                                "type": "object",
                                                "properties": {
                                                     "Employer": {"type": "string"},
+                                                    "SupplyChainReference": {"type": "string"},
                                                     "Rate": {"type": "number"},
                                                     "Units": {"type": "number"},
                                                     "Total": {"type": "number"},
@@ -68,14 +71,16 @@
                                                     "PaymentType": {"type": "string"},
                                                     "DateReceived": {"type": "string"},
                                                     "InvoiceNo": {"type": "string"},
+                                                    "RemittanceNo": {"type": "string"},
                                                     "ClientName": {"type": "string"}
                                                },
-                                               "required": ["Employer","Rate","Units","Total","Period","PaymentType","DateReceived","InvoiceNo","ClientName"],
+                                               "required": ["Employer","Rate","Units","Total","Period","PaymentType"],
                                                "additionalProperties": false
                                              }
                                            },
                                            "required": ["AssignmentLine"],
                                            "additionalProperties": false
+
                                          },
                                          "TotalInvoiced": {"type": "number"},
                                          "TotalExpenses": {"type": "number"},
@@ -102,6 +107,8 @@
                                     "required": ["Margin", "ApprenticeshipLevy", "NIERS", "EmploymentCosts", "EmployerPension", "HolidayPay", "HolidayPayCosts", "SalarySacrificePension", "Gift Aid", "TotalDeducted"],
                                     "additionalProperties": false
                                   },
+
+
                                   "HolidayPay": {
                                     "type": "object",
                                     "properties": {
@@ -190,7 +197,7 @@
 
 
                               },
-                              "required": ["Worker","PaymentPeriod","AssignmentDetails","Deductions","HolidayPay","EmployeePayment","EmployeeDeductions","PaymentSummary","YTD"],
+                              "required": ["Worker","PaymentPeriod","AssignmentDetails","Deductions",    "HolidayPay","EmployeePayment","EmployeeDeductions","PaymentSummary","YTD"],
                               "additionalProperties": false
                           }
                       },
