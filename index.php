@@ -137,11 +137,16 @@ $(function(){
                                 current_target_count++;
                                 path_targets.splice(path_targets_index, 1);
 
-                                i++; // because we want to highlight the next item as thats the actual opening bracket we care about
+                                // because we want to highlight the next item as thats the actual opening bracket we care about
+                                // unless its the first element
+                                //
+                                if(detected_error_array_index > 0){
+                                  i++;
+                                }
                             }
 
                             console.log('NUMBER', detected_error_array_index, 'Count', detected_error_array_count, ' brackets open =', brackets_open);
-                            console.log('Checking '+json_lines_arr[i]+' for '+path_targets[path_targets_index]);
+                            console.log('N Checking '+json_lines_arr[i]+' for '+path_targets[path_targets_index]);
                         }else{
 
                             if(json_lines_arr[i].includes(path_targets[path_targets_index])){
@@ -150,7 +155,7 @@ $(function(){
                                 current_target_count++;
                                 path_targets.splice(path_targets_index, 1);
                             }
-                            console.log('Checking '+json_lines_arr[i]+' for '+path_targets[path_targets_index]);
+                            console.log('C Checking '+json_lines_arr[i]+' for '+path_targets[path_targets_index]);
                         }
 
                         if(current_target_count == path_target_count){

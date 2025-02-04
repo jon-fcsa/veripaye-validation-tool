@@ -36,7 +36,7 @@
                                            "EmployeeId": {"type": "string"},
                                            "Email": {"type": "string", "format": "email"}
                                       },
-                                      "required": ["NI", "NICategory", "TaxCode", "DateOfBirth", "W1M1", "EmployeeId", "Email"],
+                                      "required": ["NI", "NICategory", "TaxCode", "DateOfBirth", "W1M1", "EmployeeId"],
                                       "additionalProperties": false
                                   },
                                   "PaymentPeriod": {
@@ -188,7 +188,7 @@
                                     "additionalProperties": false
                                   }
 
-                                  
+
                               },
                               "required": ["Worker","PaymentPeriod","AssignmentDetails","Deductions","HolidayPay","EmployeePayment","EmployeeDeductions","PaymentSummary","YTD"],
                               "additionalProperties": false
