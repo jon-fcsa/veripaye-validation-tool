@@ -44,7 +44,7 @@
             "HolidayPay": 0,
             "HolidayPayCosts": 0,
             "SalarySacrificePension": 0,
-            "Gift Aid": 0,
+            "GiftAid": 0,
             "TotalDeducted": 0
           },
           "HolidayPay": {

@@ -73,7 +73,7 @@ $(function(){
             return;
         }
 
-        // Format the input so syntax highlighting makes sense
+        // Format the input so highlighting makes sense
         var formatted_json = JSON.stringify(parseJSON, undefined, 4);
 
         $.ajax({
