@@ -149,6 +149,10 @@ $(function(){
                             console.log('N Checking '+json_lines_arr[i]+' for '+path_targets[path_targets_index]);
                         }else{
 
+                            // if(
+                            //   json_lines_arr[i].includes('"'+path_targets[path_targets_index]+'": [') ||
+                            //   json_lines_arr[i].includes('"'+path_targets[path_targets_index]+'": {')
+                            // ){
                             if(json_lines_arr[i].includes(path_targets[path_targets_index])){
                                 console.log('MATCHED '+json_lines_arr[i]+' for '+path_targets[path_targets_index]);
 
@@ -157,6 +161,8 @@ $(function(){
                             }
                             console.log('C Checking '+json_lines_arr[i]+' for '+path_targets[path_targets_index]);
                         }
+
+
 
                         if(current_target_count == path_target_count){
                             json_lines_arr[i] = '<div class="highlight">'+json_lines_arr[i]+'</div>';
@@ -176,8 +182,11 @@ $(function(){
                 $('#json_data').html(formatted_json);
 
                 // Scroll to the error
-                var topPos = document.getElementsByClassName("highlight")[0].offsetTop;
-                document.getElementById('json_data').scrollTop = topPos - 20 - document.getElementById('json_data').offsetTop;
+                if(data.error_msg != 'Valid' && document.getElementsByClassName("highlight")[0] != undefined){
+                    var topPos = document.getElementsByClassName("highlight")[0].offsetTop;
+                    document.getElementById('json_data').scrollTop = topPos - 20 - document.getElementById('json_data').offsetTop;
+                }
+
             }
         });
     });
