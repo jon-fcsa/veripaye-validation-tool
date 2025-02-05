@@ -1,0 +1,104 @@
+{
+    "Umbrella Payment": {
+        "Umbrella Details": {
+            "Name": "Deckard Umbrella LLC",
+            "Software": "BladeRunner Technologies",
+            "TaxOfficeNo": "12345",
+            "TaxOfficeReference": "FCSA2313"
+        },
+        "Payments": [
+            {
+                "Payment": {
+                    "Worker": {
+                        "NI": "ER663537B",
+                        "NICategory": "A",
+                        "TaxCode": "S1257L",
+                        "DateOfBirth": "1975-05-31",
+                        "W1M1": false,
+                        "EmployeeId": "0982238",
+                        "Email": "fcsaworker@fcsa.org.uk"
+                    },
+                    "PaymentPeriod": {
+                        "PayDate": "13/12/2024",
+                        "TaxPeriod": 35,
+                        "ActualTaxPeriod": 37,
+                        "TaxYear": "2025",
+                        "TaxPeriodType": "W",
+                        "PeriodsCovered": 1
+                    },
+                    "AssignmentDetails": {
+                        "AssignmentLines": [],
+                        "Expenses": [],
+                        "Mileages": [],
+                        "TotalInvoiced": 0,
+                        "TotalExpenses": 0,
+                        "TotalMileage": 0,
+                        "TotalReceived": 0
+                    },
+                    "Deductions": {
+                        "Margin": 0,
+                        "ApprenticeshipLevy": 0,
+                        "NIERS": 0,
+                        "EmploymentCosts": 0,
+                        "EmployerPension": 0,
+                        "HolidayPay": 0,
+                        "HolidayPayCosts": 0,
+                        "SalarySacrificePension": 0,
+                        "ExpensesDetail": [],
+                        "MileagesDetail": [],
+                        "GiftAid": 0,
+                        "OtherDeductions": [],
+                        "TotalDeducted": 0
+                    },
+                    "HolidayPay": {
+                        "Percentage": 12.07,
+                        "AmountAdvanced": 0,
+                        "AmountAccrued": 0,
+                        "Method": "Advanced"
+                    },
+                    "EmployeePayment": {
+                        "Rate": 0,
+                        "Hours": 0,
+                        "TotalBase": 0,
+                        "Bonus": 0,
+                        "HolidayPay": 0,
+                        "Other": [],
+                        "OtherTotal": 0,
+                        "Total": 0
+                    },
+                    "EmployeeDeductions": {
+                        "NI": 0,
+                        "IncomeTax": 8.2,
+                        "StudentLoan": 0,
+                        "EmployeePension": -41.22,
+                        "PostGradLoan": 0,
+                        "OtherPostTaxDeductions": [],
+                        "OtherTotal": 0
+                    },
+                    "PaymentSummary": {
+                        "GrossPay": 0,
+                        "EarningsForNI": 0,
+                        "EarningsForTax": 41.22,
+                        "Deductions": -33.02,
+                        "NetPay": 33.02,
+                        "OtherDeductions": 0,
+                        "ExpensesPaid": 0,
+                        "TotalPaid": 33.02
+                    },
+                    "Ytd": {
+                        "GrossPayYTD": 13678.83,
+                        "EarningsForTaxYTD": 0,
+                        "TaxPaidYTD": 1241.03,
+                        "EarningsForNIYTD": 14994.79,
+                        "EmployeeNIYTD": 847.6,
+                        "EmployerNIYTD": 1658.76,
+                        "EmployeePensionYTD": 0,
+                        "EmployerPensionYTD": 69.07,
+                        "StudentLoanYTD": 0,
+                        "PostgraduateLoanYTD": 0
+                    }
+                }
+            }
+        ]
+    }
+}

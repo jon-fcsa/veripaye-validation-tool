@@ -1,0 +1,185 @@
+{
+    "Umbrella Payment": {
+        "Umbrella Details": {
+            "veriPAYEClientID": "abc",
+            "Name": "Deckard Umbrella LLC",
+            "Software": "BladeRunner Technologies",
+            "TaxOfficeNo": "12345",
+            "TaxOfficeReference": "FCSA2313"
+        },
+        "Payments": [
+            {
+                "Payment": {
+                    "Worker": {
+                        "NI": "RE663452B",
+                        "NICategory": "A",
+                        "TaxCode": "1217L",
+                        "DateOfBirth": "1990-10-18",
+                        "W1M1": false,
+                        "EmployeeId": "098108838",
+                        "Email": "fcsaworker@fcsa.org.uk"
+                    },
+                    "PaymentPeriod": {
+                        "PayDate": "10/01/2025",
+                        "TaxPeriod": 40,
+                        "TaxPeriodType": "W",
+                        "PeriodsCovered": 1
+                    },
+                    "AssignmentDetails": {
+                        "AssignmentLines": [
+                            {
+                                "Employer": "Battlestar Recruitment Ltd",
+                                "ClientName": "Apex HealthTech Ltd",
+                                "Rate": 450,
+                                "Units": 2,
+                                "Total": 900,
+                                "PaymentType": "Other",
+                                "ConfirmedType": "Other",
+                                "Period": "27/12/2024-03/01/2025",
+                                "DateReceived": "03/01/2025",
+                                "InvoiceNo": "12345"
+                            },
+                            {
+                                "Employer": "Battlestar Recruitment Ltd",
+                                "ClientName": "Apex HealthTech Ltd",
+                                "Rate": 5,
+                                "Units": 6.5,
+                                "Total": 32.5,
+                                "PaymentType": "Expense",
+                                "ConfirmedType": "Expense",
+                                "Period": "27/12/2024-03/01/2025",
+                                "DateReceived": "03/01/2025",
+                                "InvoiceNo": "12345"
+                            },
+                            {
+                                "Employer": "Battlestar Recruitment Ltd",
+                                "ClientName": "Apex HealthTech Ltd",
+                                "Rate": 37,
+                                "Units": 7,
+                                "Total": 259,
+                                "PaymentType": "Expense",
+                                "ConfirmedType": "Expense",
+                                "Period": "27/12/2024-03/01/2025",
+                                "DateReceived": "03/01/2025",
+                                "InvoiceNo": "12345"
+                            },
+                            {
+                                "Employer": "Battlestar Recruitment Ltd",
+                                "ClientName": " Apex HealthTech Ltd ",
+                                "Rate": 16.34,
+                                "Units": 8,
+                                "Total": 130.72,
+                                "PaymentType": "Hour",
+                                "ConfirmedType": "Time",
+                                "Period": "27/12/2024-03/01/2025",
+                                "DateReceived": "03/01/2025",
+                                "InvoiceNo": "12345"
+                            },
+                            {
+                                "Employer": "Battlestar Recruitment Ltd",
+                                "ClientName": "Apex HealthTech Ltd",
+                                "Rate": 1.5,
+                                "Units": 20,
+                                "Total": 30,
+                                "PaymentType": "Expense",
+                                "ConfirmedType": "Expense",
+                                "Period": "27/12/2024-03/01/2025",
+                                "DateReceived": "03/01/2025",
+                                "InvoiceNo": "12345"
+                            },
+                            {
+                                "Employer": "Battlestar Recruitment Ltd",
+                                "ClientName": "Apex HealthTech Ltd",
+                                "Rate": 19.84,
+                                "Units": 40,
+                                "Total": 793.6,
+                                "PaymentType": "Hour",
+                                "ConfirmedType": "Time",
+                                "Period": "27/12/2024-03/01/2025",
+                                "DateReceived": "03/01/2025",
+                                "InvoiceNo": "12345"
+                            }
+                        ],
+                        "TotalInvoiced": 1824.32,
+                        "TotalExpenses": 321.5,
+                        "TotalMileage": 0,
+                        "TotalReceived": 2145.82
+                    },
+                    "Deductions": {
+                        "Margin": 22,
+                        "ApprenticeshipLevy": 8.26,
+                        "NIERS": 203.91,
+                        "EmploymentCosts": 0,
+                        "EmployerPension": 0,
+                        "HolidayPay": 0,
+                        "HolidayPayCosts": 0,
+                        "SalarySacrificePension": 0,
+                        "Expenses": 259,
+                        "Mileage": 0,
+                        "ExpensesDetail": [],
+                        "MileagesDetail": [],
+                        "GiftAid": 0,
+                        "OtherDeductions": [],
+                        "TotalOtherDeductions": 0,
+                        "TotalDeducted": 493.17
+                    },
+                    "HolidayPay": {
+                        "Percentage": 12.07,
+                        "AmountAdvanced": 177.98,
+                        "AmountAccrued": 0,
+                        "Method": "Advanced",
+                        "TotalAccruedCosts": 0,
+                        "TotalAccrued": 0
+                    },
+                    "EmployeePayment": {
+                        "Rate": 11.44,
+                        "Hours": 48,
+                        "TotalBase": 549.12,
+                        "Bonus": 925.55,
+                        "HolidayPay": 177.98,
+                        "Other": [],
+                        "OtherTotal": 0,
+                        "Total": 1652.65
+                    },
+                    "EmployeeDeductions": {
+                        "NI": 71.71,
+                        "IncomeTax": 282.2,
+                        "HolidayPayRetained": 0,
+                        "StudentLoan": 0,
+                        "EmployeePension": 0,
+                        "PostGradLoan": 0,
+                        "OtherPostTaxDeductions": [
+                            {
+                                "Description": "AGENCYDEDUCTION",
+                                "Amount": 70
+                            }
+                        ],
+                        "OtherTotal": 70
+                    },
+                    "PaymentSummary": {
+                        "GrossPay": 1652.65,
+                        "EarningsForNI": 1652.65,
+                        "EarningsForTax": 1652.65,
+                        "Deductions": 353.91,
+                        "NetPay": 1298.73,
+                        "OtherDeductions": 70,
+                        "ExpensesPaid": 259,
+                        "TotalPaid": 1487.73
+                    },
+                    "YTD": {
+                        "GrossPayYTD": 92978.49,
+                        "EarningsForTaxYTD": 89978.49,
+                        "TaxPaidYTD": 26923.6,
+                        "EarningsForNIYTD": 89978.49,
+                        "EmployeeNIYTD": 3229.98,
+                        "EmployerNIYTD": 11523.61,
+                        "EmployeePensionYTD": 0,
+                        "EmployerPensionYTD": 0,
+                        "StudentLoanYTD": 6476,
+                        "PostgraduateLoanYTD": 0
+                    }
+                }
+            }
+        ]
+    }
+}

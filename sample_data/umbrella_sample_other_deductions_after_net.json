@@ -1,0 +1,119 @@
+{
+  "Umbrella Payment": {
+    "Umbrella Details": {
+      "veriPAYEClientID": "abc",
+      "Name": "Deckard Umbrella LLC",
+      "Software": "BladeRunner Technologies",
+      "TaxOfficeNo": "12345",
+      "TaxOfficeReference": "FCSA2313"
+    },
+    "Payments": [
+      {
+        "Payment": {
+          "Worker": {
+            "NI": "DC206699A",
+            "NICategory": "M",
+            "TaxCode": "1143T",
+            "DateOfBirth": "2004-10-11",
+            "W1M1": true,
+            "EmployeeId": "098119902",
+            "Email": "FCSAWorker@fcsa.org.uk"
+          },
+          "PaymentPeriod": {
+            "PayDate": "13/12/2024",
+            "TaxPeriod": 36,
+            "TaxPeriodType": "W",
+            "PeriodsCovered": 1
+          },
+          "AssignmentDetails": {
+            "AssignmentLines": [
+              {
+                "AssignmentLine": {
+                  "Employer": "Battlestar Recruitment Ltd",
+                  "Rate": 18,
+                  "Units": 10,
+                  "Total": 180,
+                  "Period": "02/12/2024-08/12/2024",
+                  "PaymentType": "Time",
+                  "DateReceived": "11/12/2024",
+                  "InvoiceNo": "394648",
+                  "ClientName": "MedQuest Healthcare Ltd"
+                }
+              }
+            ],
+            "TotalInvoiced": 180,
+            "TotalExpenses": 0,
+            "TotalMileage": 0,
+            "TotalReceived": 180
+          },
+          "Deductions": {
+            "Margin": 17,
+            "ApprenticeshipLevy": 0.81,
+            "NIERS": 0,
+            "EmploymentCosts": 0,
+            "EmployerPension": 0,
+            "HolidayPay": 0,
+            "HolidayPayCosts": 0,
+            "SalarySacrificePension": 0,
+            "GiftAid": 0,
+            "TotalDeducted": 17.81
+          },
+          "HolidayPay": {
+            "Percentage": 12.07,
+            "AmountAdvanced": 17.47,
+            "AmountAccrued": 0,
+            "Method": "Advanced",
+            "TotalAccrued" : 0,
+            "TotalAccruedCosts" : 0
+          },
+          "EmployeePayment": {
+            "Rate": 8.6,
+            "Hours": 10,
+            "TotalBase": 86,
+            "Bonus": 58.72,
+            "HolidayPay": 17.47,
+            "OtherTotal": 0,
+            "Total": 162.19
+          },
+          "EmployeeDeductions": {
+            "NI": 0,
+            "IncomeTax": 0,
+            "EmployeePension": 0,
+            "OtherPostTaxDeductions": [
+              {
+                "Item": {
+                  "Description": "PAYEPro (Inc VAT)",
+                  "Amount": 7.8
+                }
+              }
+            ],
+            "StudentLoan": 0,
+            "PostGradLoan": 0
+          },
+          "PaymentSummary": {
+            "GrossPay": 162.19,
+            "EarningsForNI": 162.19,
+            "EarningsForTax": 162.19,
+            "Deductions": 0,
+            "NetPay": 162.19,
+            "OtherDeductions": 7.8,
+            "ExpensesPaid": 0,
+            "TotalPaid": 154.39
+          },
+          "YTD": {
+            "GrossPayYTD": 19691.08,
+            "EarningsForTaxYTD": 16852.4,
+            "TaxPaidYTD": 1984.2,
+            "EarningsForNIYTD": 16852.4,
+            "EmployeeNIYTD": 755.5,
+            "EmployerNIYTD": 26.36,
+            "EmployeePensionYTD": 0,
+            "EmployerPensionYTD": 0,
+            "StudentLoanYTD": 0,
+            "PostgraduateLoanYTD": 0
+          }
+        }
+      }
+    ]
+  }
+}

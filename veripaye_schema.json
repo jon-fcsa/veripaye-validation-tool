@@ -101,11 +101,11 @@
                                          "HolidayPay": {"type": "number"},
                                          "HolidayPayCosts": {"type": "number"},
                                          "SalarySacrificePension": {"type": "number"},
-                                         "Gift Aid": {"type": "number"},
+                                         "GiftAid": {"type": "number"},
                                          "TotalDeducted": {"type": "number"}
                                     },
-                                    "required": ["Margin", "ApprenticeshipLevy", "NIERS", "EmploymentCosts", "EmployerPension", "HolidayPay", "HolidayPayCosts", "SalarySacrificePension", "Gift Aid", "TotalDeducted"],
-                                    "additionalProperties": false
+                                    "required": ["Margin", "ApprenticeshipLevy", "NIERS", "EmploymentCosts", "EmployerPension", "HolidayPay", "HolidayPayCosts", "SalarySacrificePension", "GiftAid", "TotalDeducted"],
+                                    "additionalProperties": true
                                   },
 
 
@@ -168,7 +168,7 @@
                                          },
                                          "OtherTotal": {"type": "number"}
                                     },
-                                    "required": ["NI","EmployeePension","IncomeTax","HolidayPayRetained","StudentLoan","PostGradLoan","OtherPostTaxDeductions","OtherTotal"],
+                                    "required": ["NI","EmployeePension","IncomeTax"],
                                     "additionalProperties": false
                                   },
                                   "PaymentSummary": {

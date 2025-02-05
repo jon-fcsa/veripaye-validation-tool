@@ -1,0 +1,120 @@
+{
+    "Umbrella Payment": {
+        "Umbrella Details": {
+            "Name": "Deckard Umbrella LLC",
+            "Software": "BladeRunner Technologies",
+            "TaxOfficeNo": "12345",
+            "TaxOfficeReference": "FCSA2313"
+        },
+        "Payments": [
+            {
+                "Payment": {
+                    "Worker": {
+                        "NI": "RD332132B",
+                        "NICategory": "A",
+                        "TaxCode": "1118L",
+                        "W1M1": false,
+                        "EmployeeId": "323343",
+                        "Email": "fcsaworker@fcsa.org.uk",
+                        "DateOfBirth": "12/09/1976"
+                    },
+                    "PaymentPeriod": {
+                        "PayDate": "07/01/2025",
+                        "TaxPeriod": 39,
+                        "ActualTaxPeriod": 40,
+                        "TaxYear": "2024",
+                        "TaxPeriodType": "W",
+                        "PeriodsCovered": 1
+                    },
+                    "AssignmentDetails": {
+                        "AssignmentLines": [
+                            {
+                                "Employer": "Battlestar Recruitment Ltd",
+                                "ClientName": "Blue Horizon Financial Ltd",
+                                "Rate": 102.14,
+                                "Units": 30,
+                                "Total": 3064.2,
+                                "PaymentType": "Hour",
+                                "Period": "29/11/2024-06/12/2024",
+                                "DateReceived": "06/12/2024",
+                                "InvoiceNo": "2236294"
+                            }
+                        ],
+                        "Expenses": [],
+                        "Mileages": [],
+                        "TotalInvoiced": 3064.2,
+                        "TotalExpenses": 0,
+                        "TotalMileage": 0,
+                        "TotalReceived": 3064.2
+                    },
+                    "Deductions": {
+                        "Margin": 27,
+                        "ApprenticeshipLevy": 1.92,
+                        "NIERS": 28.93,
+                        "EmploymentCosts": 0,
+                        "EmployerPension": 0,
+                        "HolidayPay": 0,
+                        "HolidayPayCosts": 0,
+                        "SalarySacrificePension": 2621.73,
+                        "Expenses": 0,
+                        "Mileage": 0,
+                        "ExpensesDetail": [],
+                        "MileagesDetail": [],
+                        "GiftAid": 0,
+                        "OtherDeductions": [],
+                        "TotalOtherDeductions": 0,
+                        "TotalDeducted": 2679.58
+                    },
+                    "HolidayPay": {
+                        "Percentage": 12.07,
+                        "AmountAdvanced": 41.42,
+                        "AmountAccrued": 0,
+                        "Method": "Advanced",
+                        "TotalAccrued": 0
+                    },
+                    "EmployeePayment": {
+                        "Rate": 11.44,
+                        "Hours": 30,
+                        "TotalBase": 343.2,
+                        "Bonus": 0,
+                        "HolidayPay": 41.42,
+                        "Other": [],
+                        "OtherTotal": 0,
+                        "Total": 384.62
+                    },
+                    "EmployeeDeductions": {
+                        "NI": 11.41,
+                        "IncomeTax": -77.4,
+                        "StudentLoan": 0,
+                        "EmployeePension": 0,
+                        "PostGradLoan": 0,
+                        "OtherPostTaxDeductions": [],
+                        "OtherTotal": 0
+                    },
+                    "PaymentSummary": {
+                        "GrossPay": 384.62,
+                        "EarningsForNI": 142.62,
+                        "EarningsForTax": 169.62,
+                        "Deductions": -65.99,
+                        "OtherDeductions": 0,
+                        "NetPay": 450.61,
+                        "ExpensesPaid": 0,
+                        "TotalPaid": 450.61
+                    },
+                    "YTD": {
+                        "GrossPayYTD": 89242.92,
+                        "EarningsForTaxYTD": 80857.92,
+                        "TaxPaidYTD": 26687.8,
+                        "EarningsForNIYTD": 89242.92,
+                        "EmployeeNIYTD": 3045.64,
+                        "EmployerNIYTD": 11446.25,
+                        "EmployeePensionYTD": 0,
+                        "EmployerPensionYTD": 0,
+                        "StudentLoanYTD": 0,
+                        "PostgraduateLoanYTD": 0
+                    }
+                }
+            }
+        ]
+    }
+}

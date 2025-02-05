@@ -1,0 +1,161 @@
+{
+    "Umbrella Payment": {
+        "Umbrella Details": {
+            "veriPAYEClientID": "abc",
+            "Name": "Deckard Umbrella LLC",
+            "Software": "BladeRunner Technologies",
+            "TaxOfficeNo": "12345",
+            "TaxOfficeReference": "FCSA2313"
+        },
+        "Payments": [
+            {
+                "Payment": {
+                    "Worker": {
+                        "NI": "DC344998L",
+                        "NICategory": "A",
+                        "TaxCode": "1257L",
+                        "DateOfBirth": "1987-12-11",
+                        "W1M1": true,
+                        "EmployeeId": "6674653",
+                        "Email": "FCSAWorker@fcsa.org.uk"
+                    },
+                    "PaymentPeriod": {
+                        "PayDate": "24/12/2024",
+                        "TaxPeriod": 38,
+                        "TaxYear": "2025",
+                        "TaxPeriodType": "W",
+                        "PeriodsCovered": 1
+                    },
+                    "AssignmentDetails": {
+                        "AssignmentLines": [
+                            {
+                                "Employer": "Battlestar Recruitment Ltd",
+                                "ClientName": "",
+                                "Rate": 16,
+                                "Units": 12,
+                                "Total": 192,
+                                "PaymentType": "Hour",
+                                "ConfirmedType": "Time",
+                                "Period": "06/12/2024-13/12/2024",
+                                "DateReceived": "13/12/2024",
+                                "InvoiceNo": "2233012"
+                            },
+                            {
+                                "Employer": "Battlestar Recruitment Ltd",
+                                "ClientName": "",
+                                "Rate": 16,
+                                "Units": 36,
+                                "Total": 576,
+                                "PaymentType": "Hour",
+                                "ConfirmedType": "Time",
+                                "Period": "06/12/2024-13/12/2024",
+                                "DateReceived": "13/12/2024",
+                                "InvoiceNo": "2233012"
+                            }
+                        ],
+                        "TotalInvoiced": 768,
+                        "TotalExpenses": 0,
+                        "TotalMileage": 0,
+                        "TotalReceived": 768
+                    },
+                    "Deductions": {
+                        "Margin": 23,
+                        "ApprenticeshipLevy": 3.08,
+                        "NIERS": 60.77,
+                        "EmploymentCosts": 0,
+                        "EmployerPension": 0,
+                        "HolidayPay": 0,
+                        "HolidayPayCosts": 0,
+                        "SalarySacrificePension": 0,
+                        "Expenses": 0,
+                        "Mileage": 65.76,
+                        "ExpensesDetail": [],
+                        "MileagesDetail": [
+                            {
+                                "Rate": 2.69,
+                                "Units": 1,
+                                "Total": 2.69,
+                                "Employer": "Apex HealthTech Ltd",
+                                "Description": "Drive to site"
+                            },
+                            {
+                                "Rate": 34.64,
+                                "Units": 1,
+                                "Total": 34.64,
+                                "Employer": "Apex HealthTech Ltd",
+                                "Description": "Drive to site"
+                            },
+                            {
+                                "Rate": 28.43,
+                                "Units": 1,
+                                "Total": 28.43,
+                                "Employer": "Apex HealthTech Ltd",
+                                "Description": "Drive to site"
+                            }
+                        ],
+                        "GiftAid": 0,
+                        "OtherDeductions": [],
+                        "TotalOtherDeductions": 0,
+                        "TotalDeducted": 152.61
+                    },
+                    "HolidayPay": {
+                        "Percentage": 12.07,
+                        "AmountAdvanced": 66.27,
+                        "AmountAccrued": 0,
+                        "Method": "Advanced",
+                        "TotalAccrued": 0
+                    },
+                    "EmployeePayment": {
+                        "Rate": 11.44,
+                        "Hours": 48,
+                        "TotalBase": 549.12,
+                        "Bonus": 0,
+                        "HolidayPay": 66.27,
+                        "Other": [],
+                        "OtherTotal": 0,
+                        "Total": 615.39
+                    },
+                    "EmployeeDeductions": {
+                        "NI": 29.87,
+                        "IncomeTax": 74.8,
+                        "StudentLoan": 0,
+                        "EmployeePension": 0,
+                        "PostGradLoan": 0,
+                        "OtherPostTaxDeductions": [
+                            {
+                                "Description": "Child Support Payment",
+                                "Amount": 46.2
+                            },
+                            {
+                                "Description": "Agency Adjustment",
+                                "Amount": 50
+                            }
+                        ]
+                    },
+                    "PaymentSummary": {
+                        "GrossPay": 615.39,
+                        "EarningsForNI": 373.39,
+                        "EarningsForTax": 373.65,
+                        "Deductions": 150.87,
+                        "NetPay": 464.52,
+                        "OtherDeductions": 50,
+                        "ExpensesPaid": 65.76,
+                        "TotalPaid": 480.28
+                    },
+                    "YTD": {
+                        "GrossPayYTD": 20515.48,
+                        "EarningsForTaxYTD": 11329.36,
+                        "TaxPaidYTD": 2265.8,
+                        "EarningsForNIYTD": 19618.35,
+                        "EmployeeNIYTD": 1027.43,
+                        "EmployerNIYTD": 2031.13,
+                        "EmployeePensionYTD": 246.88,
+                        "EmployerPensionYTD": 185.17,
+                        "StudentLoanYTD": 0,
+                        "PostgraduateLoanYTD": 0
+                    }
+                }
+            }
+        ]
+    }
+}
