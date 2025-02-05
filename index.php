@@ -107,6 +107,25 @@ $(function(){
                     var detected_error_array_count = 0;
                     var brackets_open = false;
 
+                    parseJSON.get = function(p) {
+                      var obj = this;
+
+                      p = p.split('.');
+                      for (var i = 0, len = p.length; i < len - 1; i++)
+                        obj = obj[p[i]];
+
+                      return obj[p[len - 1]];
+                    };
+
+                    console.log("JSON", parseJSON);
+
+                    var target_str = path_targets.join('.').substring(1); // remove leading .
+                    console.log("PT3", target_str);
+
+                    var test = parseJSON.get(target_str);
+
+                    console.log("TEST", test);
+
                     var json_lines_arr = split_lines(formatted_json)
                     for(var i = 0; i < json_lines_arr.length; i++){
 
@@ -137,7 +156,7 @@ $(function(){
                                 current_target_count++;
                                 path_targets.splice(path_targets_index, 1);
 
-                                // because we want to highlight the next item as thats the actual opening bracket we care about
+                                // because we want to highlight the next item as that is the actual opening bracket we care about
                                 // unless its the first element
                                 //
                                 if(detected_error_array_index > 0){
