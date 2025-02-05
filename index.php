@@ -174,6 +174,10 @@ $(function(){
 
                 $('#json_data').empty();
                 $('#json_data').html(formatted_json);
+
+                // Scroll to the error
+                var topPos = document.getElementsByClassName("highlight")[0].offsetTop;
+                document.getElementById('json_data').scrollTop = topPos - 20 - document.getElementById('json_data').offsetTop;
             }
         });
     });
