@@ -105,13 +105,6 @@ $(function(){
                     }
                     console.log("PT2", path_targets);
 
-                    var path_target_count = path_targets.length - 1; // The target count at which we'll highlight an error
-                    var current_target_count = 0;
-                    var path_targets_index = 1; // start at 1 to skip the first empty string element split() creates
-
-                    var detected_error_array_index;
-                    var detected_error_array_count = 0;
-                    var brackets_open = false;
 
                     // Mark the error ion the json obj
                     //
@@ -137,9 +130,8 @@ $(function(){
 
                     for(var i = 0; i < json_lines_arr.length; i++){
 
-                        // console.log('C Checking '+json_lines_arr[i]+' for '+path_targets[path_targets_index]);
+                        // console.log('C Checking '+json_lines_arr[i]);
 
-                        //if(current_target_count == path_target_count){
                         if(json_lines_arr[i].includes('¬')){
                             json_lines_arr[i] = '<div class="highlight">'+json_lines_arr[i]+'</div>';
                             break;
