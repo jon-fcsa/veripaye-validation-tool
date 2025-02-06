@@ -57,10 +57,10 @@ $(function(){
         $('#json_container').css('background-color', '#2b2a33');
         var json_data = $('#json_data').text();
 
-        console.log('json_data',json_data);
-
         // remove the error flag if it exists (reset for revalidation)
-        json_data = json_data.replace('&hairsp;','');
+        if(json_data.includes('¬')){
+            json_data = json_data.replace('¬','');
+        }
 
         if(!json_data){
             output('No JSON data was entered');
@@ -118,7 +118,7 @@ $(function(){
                     var marked_path_targets = path_targets;
                     var target_str = path_targets.join('"]["').substring(2); // remove leading .
 
-                    marked_path_targets[marked_path_targets.length-1] = marked_path_targets[marked_path_targets.length-1]+'&hairsp;';
+                    marked_path_targets[marked_path_targets.length-1] = marked_path_targets[marked_path_targets.length-1]+'¬';
                     var marked_target_str = marked_path_targets.join('"]["').substring(2); // remove leading .
                     var eval_str= 'parseJSON'+marked_target_str+'"] = parseJSON'+target_str+'"]';
 
@@ -131,80 +131,16 @@ $(function(){
                     //---------------------
 
 
-
                     // Format the input so syntax highlighting makes sense
                     var formatted_json = JSON.stringify(parseJSON, undefined, 4);
-
                     var json_lines_arr = split_lines(formatted_json)
+
                     for(var i = 0; i < json_lines_arr.length; i++){
 
-
-                        /*************************************************/
-                        /*************************************************/
-                        /*************************************************/
-                        /********************************************
-                        //
-                        // The error is now marked - handle that isntead
-                        //
-                        // Instead of constantly iterating over the target path
-                        // Compare the current target path item against each line - looking for a match
-                        // If one is found increase the count and delete the match
-                        //
-                        // If the path contains a number then its an element in an array that has an issue
-                        // Handle this differently as opposed to the usual substring check
-                        //
-                        if(isNumeric(path_targets[path_targets_index])){
-
-                            // Bracket counting for now - one level deep
-                            detected_error_array_index = Number(path_targets[path_targets_index]);
-
-                            if(json_lines_arr[i].includes("{")){
-                                brackets_open = true;
-                            }
-                            if(brackets_open && json_lines_arr[i].includes("}")){
-                                detected_error_array_count++;
-                                brackets_open = false;
-                            }
-
-                            //if(detected_error_array_index == detected_error_array_count || detected_error_array_index == 0){
-                            if(detected_error_array_index == detected_error_array_count){
-                                console.log('ARR item located');
-
-                                current_target_count++;
-                                path_targets.splice(path_targets_index, 1);
-
-                                // because we want to highlight the next item as that is the actual opening bracket we care about
-                                // unless its the first element
-                                //
-                                if(detected_error_array_index > 0){
-                                  i++;
-                                }
-                            }
-
-                            console.log('NUMBER', detected_error_array_index, 'Count', detected_error_array_count, ' brackets open =', brackets_open);
-                            console.log('N Checking '+json_lines_arr[i]+' for '+path_targets[path_targets_index]);
-                        }else{
-
-                            // if(
-                            //   json_lines_arr[i].includes('"'+path_targets[path_targets_index]+'": [') ||
-                            //   json_lines_arr[i].includes('"'+path_targets[path_targets_index]+'": {')
-                            // ){
-                            if(json_lines_arr[i].includes(path_targets[path_targets_index])){
-                                console.log('MATCHED '+json_lines_arr[i]+' for '+path_targets[path_targets_index]);
-
-                                current_target_count++;
-                                path_targets.splice(path_targets_index, 1);
-                            }
-                            console.log('C Checking '+json_lines_arr[i]+' for '+path_targets[path_targets_index]);
-                        }
-                        /*************************************************/
-                        /*************************************************/
-                        /*************************************************/
-
-                        console.log('C Checking '+json_lines_arr[i]+' for '+path_targets[path_targets_index]);
+                        // console.log('C Checking '+json_lines_arr[i]+' for '+path_targets[path_targets_index]);
 
                         //if(current_target_count == path_target_count){
-                        if(json_lines_arr[i].includes('&hairsp;')){
+                        if(json_lines_arr[i].includes('¬')){
                             json_lines_arr[i] = '<div class="highlight">'+json_lines_arr[i]+'</div>';
                             break;
                         }
