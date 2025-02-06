@@ -57,6 +57,11 @@ $(function(){
         $('#json_container').css('background-color', '#2b2a33');
         var json_data = $('#json_data').text();
 
+        console.log('json_data',json_data);
+
+        // remove the error flag if it exists (reset for revalidation)
+        json_data = json_data.replace('&hairsp;','');
+
         if(!json_data){
             output('No JSON data was entered');
             return;
@@ -64,6 +69,7 @@ $(function(){
 
         // Catch any syntax errors before looking for schema errors
         try{
+
             var parseJSON = JSON.parse(json_data);
         }catch(e){
             if((e instanceof SyntaxError)){
@@ -73,8 +79,8 @@ $(function(){
             return;
         }
 
-        // Format the input so highlighting makes sense
-        var formatted_json = JSON.stringify(parseJSON, undefined, 4);
+        // // Format the input so highlighting makes sense
+        // var formatted_json = JSON.stringify(parseJSON, undefined, 4);
 
         $.ajax({
             type: "POST",
@@ -107,70 +113,39 @@ $(function(){
                     var detected_error_array_count = 0;
                     var brackets_open = false;
 
-                    parseJSON.get = function(p) {
-                      var obj = this;
-
-                      p = p.split('.');
-                      for (var i = 0, len = p.length; i < len - 1; i++){
-                        obj = obj[p[i]];
-                      }
-
-                      return obj[p[len - 1]];
-                    };
-
-                    parseJSON.set = function(p, value) {
-                      var obj = this;
-
-                      p = p.split('.');
-                      for (var i = 0, len = p.length; i < len - 1; i++){
-                        obj = obj[p[i]];
-                      }
-
-                      obj[p[len - 1]] = value;
-                    };
-
-                    // console.log("JSON", parseJSON);
+                    // Mark the error ion the json obj
                     //
-                    // console.log('-----------------------');
-                    // var temp_obj = parseJSON;
-                    // console.log('temp_obj', temp_obj);
+                    var marked_path_targets = path_targets;
+                    var target_str = path_targets.join('"]["').substring(2); // remove leading .
+
+                    marked_path_targets[marked_path_targets.length-1] = marked_path_targets[marked_path_targets.length-1]+'&hairsp;';
+                    var marked_target_str = marked_path_targets.join('"]["').substring(2); // remove leading .
+                    var eval_str= 'parseJSON'+marked_target_str+'"] = parseJSON'+target_str+'"]';
+
+                    // Mark the error
+                    eval(eval_str);
+
+                    // Delete the origional
+                    eval('delete parseJSON'+target_str+'"]');
                     //
-                    // for (var i = 1, len = path_targets.length; i < len - 1; i++){
-                    //     console.log('loop target', path_targets[i]);
-                    //
-                    //     temp_obj = temp_obj[path_targets[i]];
-                    //     console.log('temp_obj', temp_obj);
-                    // }
-                    //
-                    // temp_obj[path_targets[len - 1]]['_mark_error'] = true;
-                    //
-                    // console.log(temp_obj[path_targets[len - 1]]);
-                    //
-                    // console.log('-----------------------');
-                    //
-                    // parseJSON = temp_obj;
-                    // console.log('MARKED', parseJSON);
+                    //---------------------
 
 
-                    var target_str = path_targets.join('.').substring(1); // remove leading .
-                    console.log("PT3", target_str);
 
-                    console.log('-----------------------');
-
-                    var test = parseJSON.get(target_str);
-                    console.log("test", test);
-
-                    parseJSON.set(target_str, true);
-                    console.log("parseJSON", parseJSON);
-
-                    console.log('-----------------------');
-                    console.log('');
-
-
+                    // Format the input so syntax highlighting makes sense
+                    var formatted_json = JSON.stringify(parseJSON, undefined, 4);
 
                     var json_lines_arr = split_lines(formatted_json)
                     for(var i = 0; i < json_lines_arr.length; i++){
 
+
+                        /*************************************************/
+                        /*************************************************/
+                        /*************************************************/
+                        /********************************************
+                        //
+                        // The error is now marked - handle that isntead
+                        //
                         // Instead of constantly iterating over the target path
                         // Compare the current target path item against each line - looking for a match
                         // If one is found increase the count and delete the match
@@ -222,10 +197,14 @@ $(function(){
                             }
                             console.log('C Checking '+json_lines_arr[i]+' for '+path_targets[path_targets_index]);
                         }
+                        /*************************************************/
+                        /*************************************************/
+                        /*************************************************/
 
+                        console.log('C Checking '+json_lines_arr[i]+' for '+path_targets[path_targets_index]);
 
-
-                        if(current_target_count == path_target_count){
+                        //if(current_target_count == path_target_count){
+                        if(json_lines_arr[i].includes('&hairsp;')){
                             json_lines_arr[i] = '<div class="highlight">'+json_lines_arr[i]+'</div>';
                             break;
                         }
