@@ -111,20 +111,62 @@ $(function(){
                       var obj = this;
 
                       p = p.split('.');
-                      for (var i = 0, len = p.length; i < len - 1; i++)
+                      for (var i = 0, len = p.length; i < len - 1; i++){
                         obj = obj[p[i]];
+                      }
 
                       return obj[p[len - 1]];
                     };
 
-                    console.log("JSON", parseJSON);
+                    parseJSON.set = function(p, value) {
+                      var obj = this;
+
+                      p = p.split('.');
+                      for (var i = 0, len = p.length; i < len - 1; i++){
+                        obj = obj[p[i]];
+                      }
+
+                      obj[p[len - 1]] = value;
+                    };
+
+                    // console.log("JSON", parseJSON);
+                    //
+                    // console.log('-----------------------');
+                    // var temp_obj = parseJSON;
+                    // console.log('temp_obj', temp_obj);
+                    //
+                    // for (var i = 1, len = path_targets.length; i < len - 1; i++){
+                    //     console.log('loop target', path_targets[i]);
+                    //
+                    //     temp_obj = temp_obj[path_targets[i]];
+                    //     console.log('temp_obj', temp_obj);
+                    // }
+                    //
+                    // temp_obj[path_targets[len - 1]]['_mark_error'] = true;
+                    //
+                    // console.log(temp_obj[path_targets[len - 1]]);
+                    //
+                    // console.log('-----------------------');
+                    //
+                    // parseJSON = temp_obj;
+                    // console.log('MARKED', parseJSON);
+
 
                     var target_str = path_targets.join('.').substring(1); // remove leading .
                     console.log("PT3", target_str);
 
-                    var test = parseJSON.get(target_str);
+                    console.log('-----------------------');
 
-                    console.log("TEST", test);
+                    var test = parseJSON.get(target_str);
+                    console.log("test", test);
+
+                    parseJSON.set(target_str, true);
+                    console.log("parseJSON", parseJSON);
+
+                    console.log('-----------------------');
+                    console.log('');
+
+
 
                     var json_lines_arr = split_lines(formatted_json)
                     for(var i = 0; i < json_lines_arr.length; i++){
