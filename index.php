@@ -90,7 +90,11 @@ $(function(){
                 "json_data": json_data
             },
             success: function(data){
+                var formatted_json;
                 data = JSON.parse(data);
+
+                // Format the input so syntax highlighting makes sense - this happenes here so valid condition has something to work with
+                formatted_json = JSON.stringify(parseJSON, undefined, 4);
 
                 if(data.error_path == false){
                     output(data.error_msg);
@@ -124,8 +128,8 @@ $(function(){
                     //---------------------
 
 
-                    // Format the input so syntax highlighting makes sense
-                    var formatted_json = JSON.stringify(parseJSON, undefined, 4);
+                    // Need to format again since we've added the marker
+                    formatted_json = JSON.stringify(parseJSON, undefined, 4);
                     var json_lines_arr = split_lines(formatted_json)
 
                     for(var i = 0; i < json_lines_arr.length; i++){
@@ -143,7 +147,12 @@ $(function(){
                 }
 
                 if(data.error_msg == "Valid"){
-                  $('#json_container').css('background-color', '#284028');
+                    $('#json_container').css('background-color', '#284028');
+
+                    // remove the error flag if it exists - were done
+                    if(formatted_json.includes('¬')){
+                        formatted_json = formatted_json.replace('¬','');
+                    }
                 }
 
                 $('#json_data').empty();
@@ -155,7 +164,7 @@ $(function(){
                     document.getElementById('json_data').scrollTop = topPos - 20 - document.getElementById('json_data').offsetTop;
                 }
 
-            }
+            } // end success handler
         });
     });
 
