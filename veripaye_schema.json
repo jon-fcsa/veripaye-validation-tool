@@ -59,29 +59,25 @@
                                     "properties": {
                                          "AssignmentLines": {
                                            "type": "array",
+                                           "minItems": 1,
                                            "items": {
-                                             "AssignmentLine": {
-                                               "type": "object",
-                                               "properties": {
-                                                    "Employer": {"type": "string"},
-                                                    "SupplyChainReference": {"type": "string"},
-                                                    "Rate": {"type": "number"},
-                                                    "Units": {"type": "number"},
-                                                    "Total": {"type": "number"},
-                                                    "Period": {"type": "string"},
-                                                    "PaymentType": {"type": "string"},
-                                                    "DateReceived": {"type": "string"},
-                                                    "InvoiceNo": {"type": "string"},
-                                                    "RemittanceNo": {"type": "string"},
-                                                    "ClientName": {"type": "string"}
-                                               },
-                                               "required": ["Employer","Rate","Units","Total","Period","PaymentType"],
-                                               "additionalProperties": false
+                                             "type": "object",
+                                             "properties": {
+                                                 "Employer": {"type": "string"},
+                                                 "SupplyChainReference": {"type": "string"},
+                                                 "Rate": {"type": "number"},
+                                                 "Units": {"type": "number"},
+                                                 "Total": {"type": "number"},
+                                                 "Period": {"type": "string"},
+                                                 "PaymentType": {"type": "string"},
+                                                 "DateReceived": {"type": "string"},
+                                                 "InvoiceNo": {"type": "string"},
+                                                 "RemittanceNo": {"type": "string"},
+                                                 "ClientName": {"type": "string"}
                                              }
                                            },
-                                           "required": ["AssignmentLine"],
+                                           "required": ["Employer","Rate","Units","Total","Period","PaymentType"],
                                            "additionalProperties": false
-
                                          },
                                          "Expenses": {"type": "array"},
                                          "Mileages": {"type": "array"},

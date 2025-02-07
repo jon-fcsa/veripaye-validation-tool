@@ -101,14 +101,12 @@ $(function(){
                 }else{
                     // Use the error path to highlight the JSON error location
                     var path_targets = data.error_path.split("/");
-                    console.log("PT1", path_targets);
 
                     // converet html entites back to what they were so matching doesn't break.
                     for(var i = 0; i < path_targets.length; i++){
                         path_targets[i] = decodeURIComponent(path_targets[i]);
                     }
-                    console.log("PT2", path_targets);
-
+                    console.log('path_targets', path_targets);
 
                     // Mark the error ion the json obj
                     //
@@ -124,7 +122,6 @@ $(function(){
 
                     // Delete the origional
                     eval('delete parseJSON'+target_str+'"]');
-                    //
                     //---------------------
 
 
@@ -134,8 +131,7 @@ $(function(){
 
                     for(var i = 0; i < json_lines_arr.length; i++){
 
-                        // console.log('C Checking '+json_lines_arr[i]);
-
+                        // console.log('Checking '+json_lines_arr[i]);
                         if(json_lines_arr[i].includes('¬')){
                             json_lines_arr[i] = '<div class="highlight">'+json_lines_arr[i]+'</div>';
                             break;
