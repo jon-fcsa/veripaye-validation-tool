@@ -2,10 +2,10 @@
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "type": "object",
     "properties": {
-      "Umbrella Payment": {
+      "UmbrellaPayment": {
           "type": "object",
           "properties": {
-              "Umbrella Details": {
+              "UmbrellaDetails": {
                   "type": "object",
                   "properties": {
                        "veriPAYEClientID": {"type": "string"},
@@ -214,10 +214,10 @@
                   }
               }
           },
-          "required": ["Umbrella Details", "Payments"],
+          "required": ["UmbrellaDetails", "Payments"],
           "additionalProperties": false
       }
     },
-    "required": ["Umbrella Payment"],
+    "required": ["UmbrellaPayment"],
     "additionalProperties": false
 }
