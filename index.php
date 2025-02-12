@@ -38,6 +38,7 @@ if(isset($_GET['validate_json'])){
   echo json_encode($return_val);
   die();
 }
+
 ?>
 <html>
 <head>
@@ -79,7 +80,7 @@ $(function(){
             return;
         }
 
-        // // Format the input so highlighting makes sense
+        // Format the input so highlighting makes sense
         var formatted_json = JSON.stringify(parseJSON, undefined, 4);
 
         $.ajax({
@@ -106,9 +107,17 @@ $(function(){
                     for(var i = 0; i < path_targets.length; i++){
                         path_targets[i] = decodeURIComponent(path_targets[i]);
                     }
-                    console.log('path_targets', path_targets);
+                    // console.log('path_targets', path_targets);
 
-                    // Mark the error ion the json obj
+                    // Figure out of the target were about to mark is a number, because if it is, it's an array index and marking it will destroy the object
+                    // So instead mark its parent if thats not a number otherwise loop back till we find something we can mark
+                    var target_offset = 1;
+                    while(!isNaN(path_targets[path_targets.length-target_offset])){
+                        path_targets.pop();
+                        target_offset++;
+                    }
+
+                    // Mark the error ion the json obj - eval makes sense here...
                     //
                     var marked_path_targets = path_targets;
                     var target_str = path_targets.join('"]["').substring(2); // remove leading .
@@ -122,36 +131,14 @@ $(function(){
 
                     // Delete the origional
                     eval('delete parseJSON'+target_str+'"]');
+                    //
                     //---------------------
-
-
-                    console.log('1 LINES', formatted_json);
 
                     // Need to format again since we've added the marker
                     formatted_json = JSON.stringify(parseJSON, undefined, 4);
-
-                    // because JSON.stringify will null things -> https://stackoverflow.com/questions/27955104/json-stringify-removing-data-from-object
-
-                    // const config = {
-                    //   hoverPreviewEnabled: false,
-                    //   hoverPreviewArrayCount: 100,
-                    //   hoverPreviewFieldCount: 5,
-                    //   animateOpen: true,
-                    //   animateClose: true,
-                    //   theme: null, // or 'dark'
-                    //   useToJSON: true, // use the toJSON method to render an object as a string as available
-                    //   maxArrayItems: 100,
-                    //   exposePath: false
-                    // };
-                    // formatted_json = JSONFormatter(parseJSON, open, config)
-
-
-                    console.log('2 LINES', formatted_json);
-
                     var json_lines_arr = split_lines(formatted_json)
 
                     for(var i = 0; i < json_lines_arr.length; i++){
-
                         // console.log('Checking '+json_lines_arr[i]);
                         if(json_lines_arr[i].includes('¬')){
                             json_lines_arr[i] = '<div class="highlight">'+json_lines_arr[i]+'</div>';
@@ -183,6 +170,8 @@ $(function(){
 
             } // end success handler
         });
+
+
     });
 
     function split_lines(str){
@@ -196,8 +185,6 @@ $(function(){
         $("#output").empty();
         $("#output").append(msg);
     }
-
-
 
 
 });
