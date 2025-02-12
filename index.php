@@ -46,6 +46,7 @@ if(isset($_GET['validate_json'])){
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <title>Veripaye JSON schema validation tool</title>
     <link rel="stylesheet" href="./style.css">
+    <script src="./formatter/dist/json-formatter.umd.js"></script>
 </head>
 <body>
 <div class="spacer"></div>
@@ -69,7 +70,6 @@ $(function(){
 
         // Catch any syntax errors before looking for schema errors
         try{
-
             var parseJSON = JSON.parse(json_data);
         }catch(e){
             if((e instanceof SyntaxError)){
@@ -80,7 +80,7 @@ $(function(){
         }
 
         // // Format the input so highlighting makes sense
-        // var formatted_json = JSON.stringify(parseJSON, undefined, 4);
+        var formatted_json = JSON.stringify(parseJSON, undefined, 4);
 
         $.ajax({
             type: "POST",
@@ -125,8 +125,29 @@ $(function(){
                     //---------------------
 
 
+                    console.log('1 LINES', formatted_json);
+
                     // Need to format again since we've added the marker
                     formatted_json = JSON.stringify(parseJSON, undefined, 4);
+
+                    // because JSON.stringify will null things -> https://stackoverflow.com/questions/27955104/json-stringify-removing-data-from-object
+
+                    // const config = {
+                    //   hoverPreviewEnabled: false,
+                    //   hoverPreviewArrayCount: 100,
+                    //   hoverPreviewFieldCount: 5,
+                    //   animateOpen: true,
+                    //   animateClose: true,
+                    //   theme: null, // or 'dark'
+                    //   useToJSON: true, // use the toJSON method to render an object as a string as available
+                    //   maxArrayItems: 100,
+                    //   exposePath: false
+                    // };
+                    // formatted_json = JSONFormatter(parseJSON, open, config)
+
+
+                    console.log('2 LINES', formatted_json);
+
                     var json_lines_arr = split_lines(formatted_json)
 
                     for(var i = 0; i < json_lines_arr.length; i++){
@@ -175,6 +196,9 @@ $(function(){
         $("#output").empty();
         $("#output").append(msg);
     }
+
+
+
 
 });
 </script>

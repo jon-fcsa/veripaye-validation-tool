@@ -1,6 +1,6 @@
 {
-    "Umbrella Payment": {
-        "Umbrella Details": {
+    "UmbrellaPayment": {
+        "UmbrellaDetails": {
             "veriPAYEClientID": "abc",
             "Name": "Deckard Umbrella LLC",
             "Software": "BladeRunner Technologies",
@@ -62,12 +62,14 @@
                         "Percentage": 12.07,
                         "AmountAdvanced": 329.81,
                         "AmountAccrued": 0,
-                        "Method": "Advanced"
+                        "Method": "Advanced",
+                        "TotalAccrued": 123,
+                        "TotalAccruedCosts": 123
                     },
                     "EmployeePayment": {
                         "Rate": 11.44,
                         "Hours": 52.5,
-                        "Total Base": 600.6,
+                        "TotalBase": 600.6,
                         "Bonus": 2131.84,
                         "HolidayPay": 329.81,
                         "OtherTotal": 0,
@@ -90,8 +92,8 @@
                     },
                     "PaymentSummary": {
                         "GrossPay": 3062.25,
-                        "EarningsforNI": 3062.25,
-                        "EarningsforTax": 3062.25,
+                        "EarningsForNI": 3062.25,
+                        "EarningsForTax": 3062.25,
                         "Deductions": 1318.1,
                         "OtherDeductions": 0,
                         "NetPay": 1736.35,
@@ -100,9 +102,9 @@
                     },
                     "YTD": {
                         "GrossPayYTD": 92978.49,
-                        "EarningsforTax YTD": 89978.49,
+                        "EarningsForTaxYTD": 89978.49,
                         "TaxPaidYTD": 26923.6,
-                        "EarningsforNIYTD": 89978.49,
+                        "EarningsForNIYTD": 89978.49,
                         "EmployeeNIYTD": 3229.98,
                         "EmployerNIYTD": 11523.61,
                         "EmployeePensionYTD": 0,
