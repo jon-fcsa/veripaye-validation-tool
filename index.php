@@ -96,6 +96,7 @@ $(function(){
 
                 // Format the input so syntax highlighting makes sense - this happenes here so valid condition has something to work with
                 formatted_json = JSON.stringify(parseJSON, undefined, 4);
+                console.log('formatted_json', formatted_json);
 
                 if(data.error_path == false){
                     output(data.error_msg);
@@ -136,25 +137,13 @@ $(function(){
                         var marked_target_str = marked_path_targets.join('"]["').substring(2); // remove leading .
                         var eval_str= 'parseJSON'+marked_target_str+'"] = parseJSON'+target_str+'"]';
 
-                        // try{
-                            // Mark the error
-                            console.log("E1 ",eval_str);
-                            eval(eval_str);
+                        // Mark the error
+                        console.log("E1 ",eval_str);
+                        eval(eval_str);
 
-
-                            // Delete the origional
-                            console.log("E2 ",'delete parseJSON'+target_str+'"]');
-                            eval('delete parseJSON'+target_str+'"]');
-
-                        // }catch(e){
-                        //     if((e)){
-                        //         $('#json_container').css('background-color', '#520e0e');
-                        //         output("Issue evaluating the data");
-                        //     }
-                        //     return;
-                        // }
-
-
+                        // Delete the origional
+                        console.log("E2 ",'delete parseJSON'+target_str+'"]');
+                        eval('delete parseJSON'+target_str+'"]');
                         //
                         //---------------------
 
