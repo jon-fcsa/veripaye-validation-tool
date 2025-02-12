@@ -100,49 +100,74 @@ $(function(){
                 if(data.error_path == false){
                     output(data.error_msg);
                 }else{
-                    // Use the error path to highlight the JSON error location
-                    var path_targets = data.error_path.split("/");
 
-                    // converet html entites back to what they were so matching doesn't break.
-                    for(var i = 0; i < path_targets.length; i++){
-                        path_targets[i] = decodeURIComponent(path_targets[i]);
-                    }
-                    // console.log('path_targets', path_targets);
+                    // Edge-case of ther being an issue with the root node, handle diffrently
+                    // Just highlight the first line
+                    if(data.error_path == "/"){
 
-                    // Figure out of the target were about to mark is a number, because if it is, it's an array index and marking it will destroy the object
-                    // So instead mark its parent if thats not a number otherwise loop back till we find something we can mark
-                    var target_offset = 1;
-                    while(!isNaN(path_targets[path_targets.length-target_offset])){
-                        path_targets.pop();
-                        target_offset++;
-                    }
+                      var json_lines_arr = split_lines(formatted_json)
+                      json_lines_arr[0] = '<div class="highlight">'+json_lines_arr[0]+'</div>';
 
-                    // Mark the error ion the json obj - eval makes sense here...
-                    //
-                    var marked_path_targets = path_targets;
-                    var target_str = path_targets.join('"]["').substring(2); // remove leading .
+                    }else{
 
-                    marked_path_targets[marked_path_targets.length-1] = marked_path_targets[marked_path_targets.length-1]+'¬';
-                    var marked_target_str = marked_path_targets.join('"]["').substring(2); // remove leading .
-                    var eval_str= 'parseJSON'+marked_target_str+'"] = parseJSON'+target_str+'"]';
+                        // Use the error path to highlight the JSON error location
+                        var path_targets = data.error_path.split("/");
 
-                    // Mark the error
-                    eval(eval_str);
+                        // converet html entites back to what they were so matching doesn't break.
+                        for(var i = 0; i < path_targets.length; i++){
+                            path_targets[i] = decodeURIComponent(path_targets[i]);
+                        }
+                        console.log('path_targets', path_targets);
 
-                    // Delete the origional
-                    eval('delete parseJSON'+target_str+'"]');
-                    //
-                    //---------------------
+                        // Figure out of the target were about to mark is a number, because if it is, it's an array index and marking it will destroy the object
+                        // So instead mark its parent if thats not a number otherwise loop back till we find something we can mark
+                        var target_offset = 1;
+                        while(!isNaN(path_targets[path_targets.length-target_offset])){
+                            path_targets.pop();
+                            target_offset++;
+                        }
 
-                    // Need to format again since we've added the marker
-                    formatted_json = JSON.stringify(parseJSON, undefined, 4);
-                    var json_lines_arr = split_lines(formatted_json)
+                        // Mark the error ion the json obj - eval makes sense here...
+                        //
+                        var marked_path_targets = path_targets;
+                        var target_str = path_targets.join('"]["').substring(2); // remove leading .
 
-                    for(var i = 0; i < json_lines_arr.length; i++){
-                        // console.log('Checking '+json_lines_arr[i]);
-                        if(json_lines_arr[i].includes('¬')){
-                            json_lines_arr[i] = '<div class="highlight">'+json_lines_arr[i]+'</div>';
-                            break;
+                        marked_path_targets[marked_path_targets.length-1] = marked_path_targets[marked_path_targets.length-1]+'¬';
+                        var marked_target_str = marked_path_targets.join('"]["').substring(2); // remove leading .
+                        var eval_str= 'parseJSON'+marked_target_str+'"] = parseJSON'+target_str+'"]';
+
+                        // try{
+                            // Mark the error
+                            console.log("E1 ",eval_str);
+                            eval(eval_str);
+
+
+                            // Delete the origional
+                            console.log("E2 ",'delete parseJSON'+target_str+'"]');
+                            eval('delete parseJSON'+target_str+'"]');
+
+                        // }catch(e){
+                        //     if((e)){
+                        //         $('#json_container').css('background-color', '#520e0e');
+                        //         output("Issue evaluating the data");
+                        //     }
+                        //     return;
+                        // }
+
+
+                        //
+                        //---------------------
+
+                        // Need to format again since we've added the marker
+                        formatted_json = JSON.stringify(parseJSON, undefined, 4);
+                        var json_lines_arr = split_lines(formatted_json)
+
+                        for(var i = 0; i < json_lines_arr.length; i++){
+                            // console.log('Checking '+json_lines_arr[i]);
+                            if(json_lines_arr[i].includes('¬')){
+                                json_lines_arr[i] = '<div class="highlight">'+json_lines_arr[i]+'</div>';
+                                break;
+                            }
                         }
                     }
 
