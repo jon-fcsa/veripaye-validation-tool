@@ -1,0 +1,41 @@
+{
+    "UmbrellaPayment": {
+        "UmbrellaDetails": {
+            "veriPAYEClientID": "abc",
+            "Name": "AAA",
+            "Software": "BBB",
+            "TaxOfficeNo": "581",
+            "TaxOfficeReference": "ZZ93044"
+        },
+        "Payments": [
+            {
+                "Payment": {
+                    "Worker": {
+                        "NICategory":  "C",
+                        "TaxCode":  "K82",
+                        "W1M1": false
+                    },
+                        "PaymentPeriod": {
+                        "PayDate":  "13/12/2024",
+                        "TaxPeriod": 36,
+                        "TaxPeriodType":  "W",
+                        "PeriodsCovered": 1
+                    }
+                },
+                "Payment": {
+                    "Worker": {
+                        "NICategory":  "A",
+                        "TaxCode":  "BR",
+                        "W1M1": false
+                    },
+                    "PaymentPeriod": {
+                        "PayDate":  "13/12/2024",
+                        "TaxPeriod": 36,
+                        "TaxPeriodType":  "W",
+                        "PeriodsCovered": 1
+                    }
+                }
+            }
+        ]
+    }
+}

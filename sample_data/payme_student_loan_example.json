@@ -1,0 +1,117 @@
+{
+    "UmbrellaPayment": {
+        "UmbrellaDetails": {
+            "Name": "Student Loan Example",
+            "Software": "IPS Software",
+            "TaxOfficeNo": "1234",
+            "TaxOfficeReference": "123432",
+            "veriPAYEClientID": "BpkYnYp6yomY5Gx"
+        },
+        "Payments": [
+            {
+                "Worker": {
+                    "NI": "FC342238A",
+                    "NICategory": "A",
+                    "TaxCode": "1257L",
+                    "W1M1": true,
+                    "EmployeeId": "13432535",
+                    "Email": "",
+                    "DateOfBirth": "20/03/1969"
+                },
+                "PaymentPeriod": {
+                    "PayDate": "19/12/2024",
+                    "TaxPeriod": 37,
+                    "TaxPeriodType": "W",
+                    "PeriodsCovered": 1,
+                    "Reissued": "F"
+                },
+                "AssignmentDetails": {
+                    "AssignmentLines": [
+                        {
+                            "Employer": "Recruitment LTD",
+                            "Rate": 300.00,
+                            "Units": 3,
+                            "Total": 900.00,
+                            "Period": "18/11/2024-24/11/2024",
+                            "PaymentType": "Day",
+                            "InvoiceNo": "3543543",
+                            "RemittanceNo": "134232",
+                            "ClientName": "Big company LTD"
+                        }
+                    ],
+                    "Expenses": [],
+                    "Mileages": [],
+                    "TotalInvoiced": 900.00,
+                    "TotalExpenses": 0.0,
+                    "TotalMileage": 0.0,
+                    "TotalReceived": 900.00
+                },
+                "Deductions": {
+                    "Margin": 20.00,
+                    "ApprenticeshipLevy": 3.87,
+                    "NIERS": 82.64,
+                    "EmploymentCosts": 0.0,
+                    "EmployerPension": 19.62,
+                    "HolidayPay": 83.35,
+                    "HolidayPayCosts": 0.0,
+                    "SalarySacrificePension": 0.0,
+                    "ExpensesDetail": [],
+                    "MileagesDetail": [],
+                    "Expenses": 0.0,
+                    "Mileage": 0.0,
+                    "GiftAid": 0.0,
+                    "OtherDeductions": [],
+                    "TotalOtherDeductions": 0.0,
+                    "TotalDeducted": 209.48
+                },
+                "HolidayPay": {
+                    "Percentage": 12.07,
+                    "AmountAdvanced": 83.35,
+                    "AmountAccrued": 0.0,
+                    "Method": "Advanced",
+                    "TotalAccrued": 877.17
+                },
+                "EmployeePayment": {
+                    "Rate": 11.44,
+                    "Hours": 21.00,
+                    "TotalBase":240.24,
+                    "Bonus": 450.28,
+                    "HolidayPay": 83.35,
+                    "Other": [],
+                    "OtherTotal": 0.0,
+                    "Total": 773.87
+                },
+                "EmployeeDeductions": {
+                    "NI": 42.55,
+                    "IncomeTax":99.80,
+                    "StudentLoan": 22.00,
+                    "PostGradLoan": 0.0,
+                    "EmployeePension": 32.69,
+                    "OtherPostTaxDeductions": []
+                },
+                "PaymentSummary": {
+                    "GrossPay": 773.87,
+                    "EarningsforNI": 741.18,
+                    "EarningsforTax": 741.18,
+                    "Deductions": 197.04,
+                    "OtherDeductions": 0.0,
+                    "NetPay": 576.83,
+                    "ExpensesPaid": 0.0,
+                    "TotalPaid": 576.83
+                },
+                "YTD": {
+                    "GrossPayYTD": 8144.27,
+                    "EarningsforTaxYTD": 7860.74,
+                    "TaxPaidYTD": 1233.40,
+                    "EarningsforNIYTD": 7860.74,
+                    "EmployeeNIYTD": 417.98,
+                    "EmployerNIYTD": 954.83,
+                    "EmployeePensionYTD": 283.53,
+                    "EmployerPensionYTD": 170.17,
+                    "StudentLoanYTD": 22.00,
+                    "PostgraduateLoanYTD": 0.0
+                }
+            }
+        ]
+    }
+}

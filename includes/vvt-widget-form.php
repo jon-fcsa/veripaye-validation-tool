@@ -1,57 +1,4 @@
-<?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-require("./vendor/autoload.php");
-use Opis\JsonSchema\{
-    Validator,
-    ValidationResult,
-    Errors\ErrorFormatter,
-};
-
-// Create a new validator
-$validator = new Validator();
-
-// Register our schema
-$validator->resolver()->registerFile( 'http://api.example.com/profile.json', dirname(__FILE__).'/veripaye_schema.json');
-
-// Handle POST request.
-//
-if(isset($_GET['validate_json'])){
-
-  $data = $_POST['json_data'];
-  $data = json_decode($data);
-  $result = $validator->validate($data, 'http://api.example.com/profile.json');
-
-  if($result->isValid()){
-      $return_val['error_path'] = false;
-      $return_val['error_msg'] = 'Valid';
-  }else{
-      $is_valid_result = (new ErrorFormatter())->format($result->error()); // Get error details for the front-end to use
-
-      reset($is_valid_result);
-      $return_val['error_path'] = key($is_valid_result);
-      $return_val['error_msg'] = current($is_valid_result);
-  }
-
-  echo json_encode($return_val);
-  die();
-}
-
-?>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <title>Veripaye JSON schema validation tool</title>
-    <link rel="stylesheet" href="./style.css">
-    <script src="./formatter/dist/json-formatter.umd.js"></script>
-</head>
-<body>
-<div class="spacer"></div>
-
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script>
 $(function(){
 
@@ -85,18 +32,15 @@ $(function(){
 
         $.ajax({
             type: "POST",
-            url: "index.php?validate_json",
+            url: "<?php echo get_rest_url(null, 'vvt/validate_json'); ?>",
             cache: false,
             data:{
                 "json_data": json_data
             },
             success: function(data){
                 var formatted_json;
-                data = JSON.parse(data);
-
-                // Format the input so syntax highlighting makes sense - this happenes here so valid condition has something to work with
+                // data = JSON.parse(data);
                 formatted_json = JSON.stringify(parseJSON, undefined, 4);
-                console.log('formatted_json', formatted_json);
 
                 if(data.error_path == false){
                     output(data.error_msg);
@@ -108,7 +52,6 @@ $(function(){
 
                       var json_lines_arr = split_lines(formatted_json)
                       json_lines_arr[0] = '<div class="highlight">'+json_lines_arr[0]+'</div>';
-
                     }else{
 
                         // Use the error path to highlight the JSON error location
@@ -118,7 +61,7 @@ $(function(){
                         for(var i = 0; i < path_targets.length; i++){
                             path_targets[i] = decodeURIComponent(path_targets[i]);
                         }
-                        console.log('path_targets', path_targets);
+                        // console.log('path_targets', path_targets);
 
                         // Figure out of the target were about to mark is a number, because if it is, it's an array index and marking it will destroy the object
                         // So instead mark its parent if thats not a number otherwise loop back till we find something we can mark
@@ -137,18 +80,19 @@ $(function(){
                         var marked_target_str = marked_path_targets.join('"]["').substring(2); // remove leading .
                         var eval_str= 'parseJSON'+marked_target_str+'"] = parseJSON'+target_str+'"]';
 
-                        // Mark the error
-                        console.log("E1 ",eval_str);
+                        // // Mark the error
+                        // console.log("E1 ",eval_str);
                         eval(eval_str);
-
-                        // Delete the origional
-                        console.log("E2 ",'delete parseJSON'+target_str+'"]');
+                        //
+                        // // Delete the origional
+                        // console.log("E2 ",'delete parseJSON'+target_str+'"]');
                         eval('delete parseJSON'+target_str+'"]');
                         //
                         //---------------------
 
                         // Need to format again since we've added the marker
                         formatted_json = JSON.stringify(parseJSON, undefined, 4);
+
                         var json_lines_arr = split_lines(formatted_json)
 
                         for(var i = 0; i < json_lines_arr.length; i++){
@@ -180,6 +124,7 @@ $(function(){
                 if(data.error_msg != 'Valid' && document.getElementsByClassName("highlight")[0] != undefined){
                     var topPos = document.getElementsByClassName("highlight")[0].offsetTop;
                     document.getElementById('json_data').scrollTop = topPos - 20 - document.getElementById('json_data').offsetTop;
+                    document.getElementById('json_data').scrollLeft = 0; // just incase theres a long string
                 }
 
             } // end success handler
@@ -200,12 +145,121 @@ $(function(){
         $("#output").append(msg);
     }
 
+    // Custom format function if there's a case where JSON.stringify truncates arrays of objects that dont have a numerical index
+    function format_json(json_str){
+
+      // We need to minimise it first so formatting is consistent because we dont know how it'll be pasted in.
+      json_str = json_str.replace("<br>", "");
+
+      // Remove any previous space indents but ignore space chars inside " " strings
+      json_str = json_str.replace(/([^"]+)|("[^"]+")/g, function($0, $1, $2) {
+          if ($1) {
+              return $1.replace(/\s/g, '');
+          } else {
+              return $2;
+          }
+      });
+
+      json_str = json_str.replace(/[\n\r\t]/gm, "");
+      // console.log('after minify');
+
+      var indent_str = "    "; // 4 spaces
+      var indent_count = 0;
+
+      // Regex "lookaround" so the delimeter isnt removes in the split()
+      //
+      var lines_arr = json_str.split(/(?=[{}\[\]])|(?<=[{}\[\]])/); // commas "," intentionally missed here
+
+      var formatted_str = '';
+      for(var i = 0; i < lines_arr.length; i++){
+          // console.log('Processing >> ', lines_arr[i]);
+
+          // This goes here otherwise the closing bracket would be on the same indent level as the previously indented content
+          if(lines_arr[i] == "}" || lines_arr[i] == "]"){
+            indent_count--;
+          }
+
+          //formatted_str += indent_str.repeat(indent_count); // append a repeated version of the indent string based on the indent count...
+
+          if(
+            lines_arr[i] == "{" ||
+            lines_arr[i] == "[" ||
+            lines_arr[i].includes(",") == false
+          ){
+            // console.log('{ or [ :: LINE = ', lines_arr[i]);
+            formatted_str += "<br>"+indent_str.repeat(indent_count)+lines_arr[i];
+
+          }else if (lines_arr[i].includes(",") == true && lines_arr[i].indexOf(",") != lines_arr[i].lastIndexOf(",")){ // Run this if there's more than one comma
+
+            // console.log('comma :: LINE = ', lines_arr[i]);
+            // Now deal with commas
+            formatted_str += indent_str.repeat(indent_count);
+
+            var lines = lines_arr[i].split(",");
+            // console.log('lines.length = ', lines.length);
+
+            // The first element will already be indented
+            formatted_str += "<br>"+indent_str.repeat(indent_count)+lines[0]+",<br>";
+            // So start from 1 and finish 1 early
+            for(var j = 1; j < lines.length-1; j++){
+              formatted_str += indent_str.repeat(indent_count)+lines[j]+",<br>";
+            }
+            // The last has no comma
+            formatted_str += indent_str.repeat(indent_count)+lines[lines.length-1];
+
+          }else if(
+            lines_arr[i] == "}" ||
+            lines_arr[i] == "]"
+          ){
+            formatted_str += indent_str.repeat(indent_count);
+            formatted_str += "<br>"+lines_arr[i]+"<br>";
+          }else{
+              // Edge case
+              if(lines_arr[i].includes(",")){
+                  formatted_str += "<br>"+indent_str.repeat(indent_count)+lines_arr[i];
+              }else{
+                  formatted_str += indent_str.repeat(indent_count)+lines_arr[i];
+              }
+          }
+
+          if(lines_arr[i] == "{" || lines_arr[i] == "["){
+            indent_count++;
+          }
+      }
+
+      return formatted_str;
+    }
 
 });
 </script>
+<style>
+.main_content{padding:0; margin:0; margin:15px auto; width:80%; max-width:900px; border:1px solid grey; color:white; background-color:#2b2a33;}
+.content{padding:20px; font-size:10px;}
+.content a{line-height:18px;}
 
+#json_container{
+  border:1px solid white; background-color:#2b2a33; color:white; font-size:12px;
+}
+#json_data{
+  padding:0; margin:0;
+  /* white-space: nowrap; */
+  overflow:scroll;
+  width:100%; height:500px;
+}
+#validate_json{
+  width:250px;
+  background-color: rgb(107, 107, 107);
+  color:white;
+  padding:5px 10px;
+  border:0;
+}
+#validate_json:hover{cursor:pointer;}
+#output_container{margin:0 auto; width:100%; height:100px; border-top:1px solid grey; border-bottom:1px solid grey;}
+#output{padding:10px; width:100%; height:80px; overflow-y:scroll; font-size:12px;}
+
+.highlight{width:100%; height:15px; background-color:rgba(255, 0, 0, 0.5)}
+</style>
 <div class="main_content">
-    <span class="content_title"> Veripaye JSON validation tool</span>
     <div class="content">
         <button id="validate_json">Validate JSON syntax and schema</button><br><br>
         <div id="json_container">
@@ -218,6 +272,3 @@ $(function(){
         </div>
     </div>
 </div>
-
-</body>
-</html>
